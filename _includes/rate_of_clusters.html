@@ -1,0 +1,86 @@
+
+
+
+
+
+<html lang="en">
+  
+  <head>
+    
+      <meta charset="utf-8">
+      <title>Bokeh Plot</title>
+      
+      
+        
+          
+        
+        
+          
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+        <script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+        
+      
+      
+    
+  </head>
+  
+  
+  <body>
+    
+      
+        
+          
+          
+            
+              <div class="bk-root" id="369ee027-cff3-4a78-81fe-4216722b8970" data-root-id="2098"></div>
+            
+          
+        
+      
+      
+        <script type="application/json" id="2341">
+          {"8bcf603b-a851-4985-9fff-971829e4eeae":{"defs":[],"roots":{"references":[{"attributes":{"children":[{"id":"2097"},{"id":"2059"}]},"id":"2098","type":"Column"},{"attributes":{},"id":"2081","type":"HelpTool"},{"attributes":{"axis_label":"Datapoints","coordinates":null,"formatter":{"id":"2149"},"group":null,"major_label_policy":{"id":"2150"},"ticker":{"id":"2069"}},"id":"2068","type":"LinearAxis"},{"attributes":{"data":{"x":[0],"y":[0]},"selected":{"id":"2152"},"selection_policy":{"id":"2151"}},"id":"2058","type":"ColumnDataSource"},{"attributes":{"axis":{"id":"2068"},"coordinates":null,"group":null,"ticker":null},"id":"2071","type":"Grid"},{"attributes":{"args":{"p":{"id":"2059"},"source":{"id":"2058"}},"code":"\n\n    function rnormal() {\n            var u = 0, v = 0;\n            while(u === 0) u = Math.random(); \n            while(v === 0) v = Math.random();\n            return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );\n        }\n\n    function sum(nums) {\n      var accumulator = 0;\n      for (var i = 0, l = nums.length; i &lt; l; i++)\n        accumulator += nums[i];\n      return accumulator;\n    }\n\n    function rbeta(alpha, beta) {\n      var alpha_gamma = rgamma(alpha, 1);\n      return alpha_gamma / (alpha_gamma + rgamma(beta, 1));\n    }\n\n    var SG_MAGICCONST = 1 + Math.log(4.5);\n    var LOG4 = Math.log(4.0);\n\n    function rgamma(alpha, beta) {\n      if (alpha &gt; 1) {\n        var ainv = Math.sqrt(2.0 * alpha - 1.0);\n        var bbb = alpha - LOG4;\n        var ccc = alpha + ainv;\n\n        while (true) {\n          var u1 = Math.random();\n          if (!((1e-7 &lt; u1) &amp;&amp; (u1 &lt; 0.9999999))) {\n            continue;\n          }\n          var u2 = 1.0 - Math.random();\n          var v = Math.log(u1/(1.0-u1))/ainv;\n          var x = alpha*Math.exp(v);\n          var z = u1*u1*u2;\n          var r = bbb+ccc*v-x;\n          if (r + SG_MAGICCONST - 4.5*z &gt;= 0.0 || r &gt;= Math.log(z)) {\n            return x * beta;\n          }\n        }\n      }\n      else if (alpha == 1.0) {\n        var u = Math.random();\n        while (u &lt;= 1e-7) {\n          u = Math.random();\n        }\n        return -Math.log(u) * beta;\n      }\n      else { \n        while (true) {\n          var u3 = Math.random();\n          var b = (Math.E + alpha)/Math.E;\n          var p = b*u3;\n          if (p &lt;= 1.0) {\n            var x = Math.pow(p, (1.0/alpha));\n          }\n          else {\n            var x = -Math.log((b-p)/alpha);\n          }\n          var u4 = Math.random();\n          if (p &gt; 1.0) {\n            if (u4 &lt;= Math.pow(x, (alpha - 1.0))) {\n              break;\n            }\n          }\n          else if (u4 &lt;= Math.exp(-x)) {\n            break;\n          }\n        }\n        return x * beta;\n      }\n    }\n    \n    function rdirichlet(alpha) {\n      var gammas = [];\n      for (var i = 0, l = alpha.length; i &lt; l; i++)\n        gammas.push(rgamma(alpha[i], 1));\n        \n      var accum = sum(gammas)\n      \n      for (var i = 0, l = gammas.length; i &lt; l; i++)\n        gammas[i] = gammas[i]/accum\n      return gammas\n    }\n    \n    function rcategorical(pi){\n      var u = Math.random();\n      var k = 0\n      var cum = pi[0]\n      for (var i = 1, l = pi.length; i &lt; l; i++)\n        if (u &lt;= cum){\n            break;\n        }\n        else{\n            cum = cum + pi[i]\n            k = k+1\n        }\n      return k\n    }\n      \n    \n    const data = source.data;\n    var x = data['x']\n    var y = data['y']\n\n    var K = 1000\n    var alpha = 0.1\n    var alphas = []\n    \n    for (let i = 0; i &lt; K; i++) {\n        alphas.push(alpha)\n    }\n\n    var pi = rdirichlet(alphas)\n    var seen_cluster = []\n    var i = 0\n    var z = 0\n\n    function update() {\n    \n        if (!(cb_obj.active)){\n            return;\n        }\n        \n        i = i + 1;\n        z = rcategorical(pi);\n        \n        if (seen_cluster.includes(z)){\n            x.push(i);\n            y.push(seen_cluster.indexOf(z));\n        }\n        else{\n            seen_cluster.push(z)\n            x.push(i);\n            y.push(seen_cluster.indexOf(z));\n        }  \n        source.change.emit();\n    }\n    \n    if (x.length == 1){\n        var looop = setInterval(update, 100);\n    }\n\n    if(cb_obj.active == false){\n        cb_obj.label = '\u25ba Play';\n    }\n    else {\n        cb_obj.label = '\u275a\u275a Pause';\n\n    }\n    \n"},"id":"2096","type":"CustomJS"},{"attributes":{},"id":"2064","type":"LinearScale"},{"attributes":{"start":0},"id":"2062","type":"DataRange1d"},{"attributes":{"tools":[{"id":"2076"},{"id":"2077"},{"id":"2078"},{"id":"2079"},{"id":"2080"},{"id":"2081"}]},"id":"2083","type":"Toolbar"},{"attributes":{},"id":"2066","type":"LinearScale"},{"attributes":{},"id":"2151","type":"UnionRenderers"},{"attributes":{"start":0},"id":"2060","type":"DataRange1d"},{"attributes":{"fill_alpha":{"value":0.2},"fill_color":{"value":"#1f77b4"},"hatch_alpha":{"value":0.2},"line_alpha":{"value":0.2},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"2093","type":"Scatter"},{"attributes":{"axis_label":"Assignt cluster in order of appearence","coordinates":null,"formatter":{"id":"2146"},"group":null,"major_label_policy":{"id":"2147"},"ticker":{"id":"2073"}},"id":"2072","type":"LinearAxis"},{"attributes":{},"id":"2146","type":"BasicTickFormatter"},{"attributes":{},"id":"2069","type":"BasicTicker"},{"attributes":{"axis":{"id":"2072"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"2075","type":"Grid"},{"attributes":{},"id":"2073","type":"BasicTicker"},{"attributes":{"coordinates":null,"group":null},"id":"2143","type":"Title"},{"attributes":{"fill_color":{"value":"#1f77b4"},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"2091","type":"Scatter"},{"attributes":{},"id":"2077","type":"WheelZoomTool"},{"attributes":{},"id":"2076","type":"PanTool"},{"attributes":{"overlay":{"id":"2082"}},"id":"2078","type":"BoxZoomTool"},{"attributes":{"bottom_units":"screen","coordinates":null,"fill_alpha":0.5,"fill_color":"lightgrey","group":null,"left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"2082","type":"BoxAnnotation"},{"attributes":{},"id":"2079","type":"SaveTool"},{"attributes":{},"id":"2080","type":"ResetTool"},{"attributes":{},"id":"2149","type":"BasicTickFormatter"},{"attributes":{"coordinates":null,"data_source":{"id":"2058"},"glyph":{"id":"2091"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"2093"},"nonselection_glyph":{"id":"2092"},"view":{"id":"2095"}},"id":"2094","type":"GlyphRenderer"},{"attributes":{},"id":"2150","type":"AllLabels"},{"attributes":{"source":{"id":"2058"}},"id":"2095","type":"CDSView"},{"attributes":{"below":[{"id":"2068"}],"center":[{"id":"2071"},{"id":"2075"}],"height":500,"left":[{"id":"2072"}],"renderers":[{"id":"2094"}],"title":{"id":"2143"},"toolbar":{"id":"2083"},"width":800,"x_range":{"id":"2060"},"x_scale":{"id":"2064"},"y_range":{"id":"2062"},"y_scale":{"id":"2066"}},"id":"2059","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"2147","type":"AllLabels"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"hatch_alpha":{"value":0.1},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"2092","type":"Scatter"},{"attributes":{},"id":"2152","type":"Selection"},{"attributes":{"button_type":"success","icon":null,"js_property_callbacks":{"change:active":[{"id":"2096"}]},"label":"\u25ba Play","width":320},"id":"2097","type":"Toggle"}],"root_ids":["2098"]},"title":"Bokeh Application","version":"2.4.2"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            const fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  const docs_json = document.getElementById('2341').textContent;
+                  const render_items = [{"docid":"8bcf603b-a851-4985-9fff-971829e4eeae","root_ids":["2098"],"roots":{"2098":"369ee027-cff3-4a78-81fe-4216722b8970"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    let attempts = 0;
+                    const timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        clearInterval(timer);
+                        embed_document(root);
+                      } else {
+                        attempts++;
+                        if (attempts > 100) {
+                          clearInterval(timer);
+                          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        }
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+    
+  </body>
+  
+</html>

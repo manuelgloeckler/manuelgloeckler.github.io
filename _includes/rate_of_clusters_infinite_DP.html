@@ -1,0 +1,86 @@
+
+
+
+
+
+<html lang="en">
+  
+  <head>
+    
+      <meta charset="utf-8">
+      <title>Bokeh Plot</title>
+      
+      
+        
+          
+        
+        
+          
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+        <script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+        
+      
+      
+    
+  </head>
+  
+  
+  <body>
+    
+      
+        
+          
+          
+            
+              <div class="bk-root" id="5421b021-9f1d-4de6-b250-685ab85e28a9" data-root-id="2394"></div>
+            
+          
+        
+      
+      
+        <script type="application/json" id="2648">
+          {"97f72704-0352-4b71-aa04-aa2505921f74":{"defs":[],"roots":{"references":[{"attributes":{"children":[{"id":"2393"},{"id":"2355"}]},"id":"2394","type":"Column"},{"attributes":{"below":[{"id":"2364"}],"center":[{"id":"2367"},{"id":"2371"}],"height":500,"left":[{"id":"2368"}],"renderers":[{"id":"2390"}],"title":{"id":"2450"},"toolbar":{"id":"2379"},"width":800,"x_range":{"id":"2356"},"x_scale":{"id":"2360"},"y_range":{"id":"2358"},"y_scale":{"id":"2362"}},"id":"2355","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"2453","type":"BasicTickFormatter"},{"attributes":{"data":{"x":[0],"y":[0]},"selected":{"id":"2459"},"selection_policy":{"id":"2458"}},"id":"2354","type":"ColumnDataSource"},{"attributes":{},"id":"2362","type":"LinearScale"},{"attributes":{"bottom_units":"screen","coordinates":null,"fill_alpha":0.5,"fill_color":"lightgrey","group":null,"left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"2378","type":"BoxAnnotation"},{"attributes":{},"id":"2456","type":"BasicTickFormatter"},{"attributes":{},"id":"2458","type":"UnionRenderers"},{"attributes":{"axis":{"id":"2368"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"2371","type":"Grid"},{"attributes":{},"id":"2459","type":"Selection"},{"attributes":{},"id":"2369","type":"BasicTicker"},{"attributes":{},"id":"2454","type":"AllLabels"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"hatch_alpha":{"value":0.1},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"2388","type":"Scatter"},{"attributes":{},"id":"2373","type":"WheelZoomTool"},{"attributes":{},"id":"2372","type":"PanTool"},{"attributes":{"overlay":{"id":"2378"}},"id":"2374","type":"BoxZoomTool"},{"attributes":{},"id":"2377","type":"HelpTool"},{"attributes":{},"id":"2375","type":"SaveTool"},{"attributes":{},"id":"2360","type":"LinearScale"},{"attributes":{},"id":"2457","type":"AllLabels"},{"attributes":{},"id":"2376","type":"ResetTool"},{"attributes":{"args":{"p":{"id":"2355"},"source":{"id":"2354"}},"code":"\n\n    function rnormal() {\n            var u = 0, v = 0;\n            while(u === 0) u = Math.random(); \n            while(v === 0) v = Math.random();\n            return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );\n        }\n\n    function sum(nums) {\n      var accumulator = 0;\n      for (var i = 0, l = nums.length; i &lt; l; i++)\n        accumulator += nums[i];\n      return accumulator;\n    }\n\n    function rbeta(alpha, beta) {\n      var alpha_gamma = rgamma(alpha, 1);\n      return alpha_gamma / (alpha_gamma + rgamma(beta, 1));\n    }\n\n    var SG_MAGICCONST = 1 + Math.log(4.5);\n    var LOG4 = Math.log(4.0);\n\n    function rgamma(alpha, beta) {\n      if (alpha &gt; 1) {\n        var ainv = Math.sqrt(2.0 * alpha - 1.0);\n        var bbb = alpha - LOG4;\n        var ccc = alpha + ainv;\n\n        while (true) {\n          var u1 = Math.random();\n          if (!((1e-7 &lt; u1) &amp;&amp; (u1 &lt; 0.9999999))) {\n            continue;\n          }\n          var u2 = 1.0 - Math.random();\n          var v = Math.log(u1/(1.0-u1))/ainv;\n          var x = alpha*Math.exp(v);\n          var z = u1*u1*u2;\n          var r = bbb+ccc*v-x;\n          if (r + SG_MAGICCONST - 4.5*z &gt;= 0.0 || r &gt;= Math.log(z)) {\n            return x * beta;\n          }\n        }\n      }\n      else if (alpha == 1.0) {\n        var u = Math.random();\n        while (u &lt;= 1e-7) {\n          u = Math.random();\n        }\n        return -Math.log(u) * beta;\n      }\n      else { \n        while (true) {\n          var u3 = Math.random();\n          var b = (Math.E + alpha)/Math.E;\n          var p = b*u3;\n          if (p &lt;= 1.0) {\n            var x = Math.pow(p, (1.0/alpha));\n          }\n          else {\n            var x = -Math.log((b-p)/alpha);\n          }\n          var u4 = Math.random();\n          if (p &gt; 1.0) {\n            if (u4 &lt;= Math.pow(x, (alpha - 1.0))) {\n              break;\n            }\n          }\n          else if (u4 &lt;= Math.exp(-x)) {\n            break;\n          }\n        }\n        return x * beta;\n      }\n    }\n    \n    function rdirichlet(alpha) {\n      var gammas = [];\n      for (var i = 0, l = alpha.length; i &lt; l; i++)\n        gammas.push(rgamma(alpha[i], 1));\n        \n      var accum = sum(gammas)\n      \n      for (var i = 0, l = gammas.length; i &lt; l; i++)\n        gammas[i] = gammas[i]/accum\n      return gammas\n    }\n    \n    function rcategorical(pi){\n      var u = Math.random();\n      var k = 0\n      var cum = pi[0]\n      for (var i = 1, l = pi.length; i &lt; l; i++)\n        if (u &lt;= cum){\n            break;\n        }\n        else{\n            cum = cum + pi[i]\n            k = k+1\n        }\n      return k\n    }\n      \n    \n    const data = source.data;\n    var x = data['x']\n    var y = data['y']\n\n    var alpha = 100.\n    \n\n    var vs = [rbeta(1,alpha)]\n    var pi = vs.concat([1-vs[0]])\n    var seen_cluster = [0]\n    var i = 0\n    var z = 0\n    var new_prob = 1\n\n    function update() {\n    \n        if (!(cb_obj.active)){\n            return;\n        }\n        \n        console.log(pi)\n        console.log(vs)\n        \n        i = i + 1;\n        z = rcategorical(pi);\n        \n       \n        if (seen_cluster.includes(z)){\n            x.push(i);\n            y.push(seen_cluster.indexOf(z));\n        }\n        else{\n            vs.push(rbeta(1,alpha))\n            new_prob = 1\n            for (let i = 0; i &lt; vs.length-1; i++) {\n                new_prob = new_prob*(1-vs[i])\n            }\n            new_prob = new_prob*vs[vs.length-1]\n            pi[pi.length-1] = new_prob\n            console.log(pi)\n            pi = pi.concat([1-sum(pi)])\n            console.log(pi)\n        \n            seen_cluster.push(z)\n            pi.push()\n            x.push(i);\n            y.push(seen_cluster.indexOf(z));\n        }  \n        source.change.emit();\n    }\n    \n    if (x.length == 1){\n        var looop = setInterval(update, 100);\n    }\n\n    if(cb_obj.active == false){\n        cb_obj.label = '\u25ba Play';\n    }\n    else {\n        cb_obj.label = '\u275a\u275a Pause';\n\n    }\n    \n"},"id":"2392","type":"CustomJS"},{"attributes":{"coordinates":null,"data_source":{"id":"2354"},"glyph":{"id":"2387"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"2389"},"nonselection_glyph":{"id":"2388"},"view":{"id":"2391"}},"id":"2390","type":"GlyphRenderer"},{"attributes":{"fill_alpha":{"value":0.2},"fill_color":{"value":"#1f77b4"},"hatch_alpha":{"value":0.2},"line_alpha":{"value":0.2},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"2389","type":"Scatter"},{"attributes":{"start":0},"id":"2356","type":"DataRange1d"},{"attributes":{"source":{"id":"2354"}},"id":"2391","type":"CDSView"},{"attributes":{"coordinates":null,"group":null},"id":"2450","type":"Title"},{"attributes":{"axis_label":"Assignt cluster in order of appearence","coordinates":null,"formatter":{"id":"2453"},"group":null,"major_label_policy":{"id":"2454"},"ticker":{"id":"2369"}},"id":"2368","type":"LinearAxis"},{"attributes":{"axis":{"id":"2364"},"coordinates":null,"group":null,"ticker":null},"id":"2367","type":"Grid"},{"attributes":{"start":0},"id":"2358","type":"DataRange1d"},{"attributes":{"axis_label":"Datapoints","coordinates":null,"formatter":{"id":"2456"},"group":null,"major_label_policy":{"id":"2457"},"ticker":{"id":"2365"}},"id":"2364","type":"LinearAxis"},{"attributes":{"button_type":"success","icon":null,"js_property_callbacks":{"change:active":[{"id":"2392"}]},"label":"\u25ba Play","width":320},"id":"2393","type":"Toggle"},{"attributes":{"fill_color":{"value":"#1f77b4"},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"2387","type":"Scatter"},{"attributes":{},"id":"2365","type":"BasicTicker"},{"attributes":{"tools":[{"id":"2372"},{"id":"2373"},{"id":"2374"},{"id":"2375"},{"id":"2376"},{"id":"2377"}]},"id":"2379","type":"Toolbar"}],"root_ids":["2394"]},"title":"Bokeh Application","version":"2.4.2"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            const fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  const docs_json = document.getElementById('2648').textContent;
+                  const render_items = [{"docid":"97f72704-0352-4b71-aa04-aa2505921f74","root_ids":["2394"],"roots":{"2394":"5421b021-9f1d-4de6-b250-685ab85e28a9"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    let attempts = 0;
+                    const timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        clearInterval(timer);
+                        embed_document(root);
+                      } else {
+                        attempts++;
+                        if (attempts > 100) {
+                          clearInterval(timer);
+                          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        }
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+    
+  </body>
+  
+</html>
