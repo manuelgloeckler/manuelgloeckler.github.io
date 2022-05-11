@@ -166,3 +166,4 @@ $$ \theta_{N+1}|\theta_1, \dots, \theta_N \sim \frac{\alpha G_0 + \sum_{i=1}^N \
 
 Thus the posterior base measure is also the predicitve distribution. 
 
+
