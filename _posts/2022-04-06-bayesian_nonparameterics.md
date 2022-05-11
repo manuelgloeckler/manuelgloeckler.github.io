@@ -130,7 +130,6 @@ $$ x_n \sim \mathcal{N}(\mu_k, \Sigma)$$
 
 Note that we no longer require to use the latent variables $z_n$ i.e. the cluster member ships.
 
-TODO MAKE ANIMATION
 
 ## The Dirichlet process posterior
 
@@ -151,6 +150,10 @@ You can verify easily that for any finite partition, we obtain a Dirichlet poste
 Notice that we can rewrite the posterior as following
 $$ G|\theta_1, \dots,\theta_n \sim DP\left(\alpha + N, \frac{\alpha}{\alpha + N} G_0 + \frac{N}{\alpha + N} \frac{\sum_{i=1}^N \delta_{\theta_i}}{n}\right)$$
 Thus the posterior is a weighted combination the the base distribution $G_0$ and hte emperical distribution. The weight associated with the base distribution is proportional to $\alpha$, while the empirical distribution has weight proportional to the number of observations $N$. Thus we can interpret $\alpha$ as the mass associated with the prior, taking $\alpha \rightarrow 0$ will render the prior non-informative in the sense that the predictive distribution is just given by the empirical distribution.
+
+You can play with the posterior distribution in the below animation. You can add observations by just taping into the the figure (a red dot will appear!). In this moment you conditiont our previous prior on this particular observation. You can look at multiple samples for different alpha and verify the above intuition we build!
+
+{% include dp_mixture_posterior.html %}
 
 ## The predictive distribution and the Chinese restaurant process
 
