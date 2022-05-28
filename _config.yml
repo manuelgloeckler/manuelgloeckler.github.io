@@ -117,15 +117,9 @@ sharing:
 
 ## => Comments
 ##############################
+staticman_url: https://manuelgloeckler-comments/v3/entry/github/manuelgloeckler/manuelgloeckler.github.io/master/comments
 comments:
-  provider: gitalk
-  gitalk:
-    clientID    : "b4683cbf55ce944deb55"
-    clientSecret: "4708bafb4599b1b6471bc3843778be358540c9c0"
-    repository  : "manuelgloeckler.github.io"
-    owner       : "manuelgloeckler"
-    admin: # Github repo owner and collaborators, only these guys can initialize github issues, IT IS A LIST.
-      - "manuelgloeckler"
+  provider: custom
 
 
 ## => Search
