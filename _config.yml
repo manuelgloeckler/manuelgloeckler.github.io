@@ -63,8 +63,9 @@ repository_tree: main
 ##############################
 paths:
   root    : # title link url, "/" (default)
-  home    : # home layout url, "/" (default)
-  archive : # "/archive.html" (default)
+  home    : "/index.html"
+  blog    : "/blog.html"
+  archive : #"/archive.html" (default)
   rss     : # "/feed.xml" (default)
 
 
@@ -96,7 +97,7 @@ chart: false # false (default), true
 
 ## => Paginate
 ##############################
-paginate: 8
+paginate: 6
 paginate_path: /page:num # don't change this unless for special need
 
 
@@ -170,16 +171,18 @@ exclude:
 defaults:
   - scope:
       path: ""
-      type: posts
     values:
       layout: article
+      comment: false
       sharing: true
       license: true
-      aside:
-        toc: true
       show_edit_on_github: true
       show_subscribe: true
       pageview: true
+      cover: https://tianqi.name/jekyll-TeXt-theme/docs/assets/images/axure/page-article-header-cover-image.jpg
+      header:
+        theme: dark
+        background: 'linear-gradient(135deg, rgb(63,67,84), rgb(83,104,114))'
 
 
 ## => Plugins

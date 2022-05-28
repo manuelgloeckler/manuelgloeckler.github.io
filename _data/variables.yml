@@ -4,13 +4,13 @@ default:
   lang: en
   paths:
     root: /
-    home: /
+    home: /index.html
     archive:  /archive.html
     rss:  /feed.xml
   mathjax: true
   mathjax_autoNumber: true
-  mermaid: true
-  chart: true
+  mermaid: false
+  chart: false
   toc:
     selectors: 'h1,h2,h3'
   sources: bootcdn
@@ -34,7 +34,7 @@ default:
     show_subscribe: false
     full_width: false
     sharing: false
-    comment: true
+    comment: false
     license: false
     pageview: false
     search: default

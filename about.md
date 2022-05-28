@@ -44,7 +44,7 @@ I am generally very interested in the field of probabilistc machine learning but
 * **Master of Science in Bioinformatics**\
   Okt 2019 - Mar 2022\
   University Tübingen (Grade: 1.15, 3.9 GPA equivalent)\
-  Thesis: ["Variational methods for simulation-based inference"](assests/../FINAL_thesis_version.pdf)\
+  Thesis: ["Variational methods for simulation-based inference"](assests/FINAL_thesis_version.pdf)\
   TODO TRANSCRIPT AND CERTIFICATES
 
 * **Bachelor of Science in Bioinformatics**\

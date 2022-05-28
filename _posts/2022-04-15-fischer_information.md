@@ -1,10 +1,13 @@
 ---
 layout: article
 title: The Fischer information and why you should know it
+key: A4
+tags: Statistics, Math
+comment: true
 ---
 
 Fischer information plays a pivotal role in machine learning, as we will see in some way or another it will pop up in both Frequentist or Bayesian statistical paradigms. As we will also discuss several applications and relationships of the Fischer information to other important quantities.
- 
+
 ## Notation and Definition
 
 Suppose we have a parameteric statistical model $p_{\theta}(x)$ with parameter vector $\theta$ modeling some distribution. Our goal is to learn an unknown distributin $p^*(x)$ from which we have i.i.d. samples $x_1, \dots, x_N \sim p^*(x)$. In frequentist statistics the by far most common approach to learn $\theta$ is by maximizing the likelihood $\prod_{i=1}^N p_{\theta}(x_i)$ with respect to the parameter $\theta$. To assess the goodness of fit we can use the so called **(Fischer) score**, which we define as

@@ -1,6 +1,8 @@
 ---
 layout: article
 title: Bayesian Nonparameterics
+key: A1
+tags: Bayesian ML, Statistics, Math
 ---
 
 Traditional parameteric models using a fixed and finite number of parameters can suffer from data over- or under-fitting when there is a mismatch between the complexity of the model (often expressed in terms of the number of parameters), the complexity of the true data generating process and the amount of available data. As a result we often have to do *model selection* to choose the right model from an ensemble of possible models. Unfortunatly, model selection is an operation that is complicated and tedious, independently of the use of frequentist cross-validation or Bayesian marginal probabilities as the basis for selection.
@@ -164,6 +166,14 @@ $$ P(\theta_{n+1} \in A |\theta_1, \dots, \theta_n) = \mathbb{E}\left[ G(A) | \t
 Thus with $G$ marginalized out
 $$ \theta_{N+1}|\theta_1, \dots, \theta_N \sim \frac{\alpha G_0 + \sum_{i=1}^N \delta_{\theta_i}}{\alpha + N}$$
 
-Thus the posterior base measure is also the predicitve distribution. 
+Thus the posterior base measure is also the predicitve distribution, which indeed alows us to draw samples as following:
+* With probability $\frac{\alpha}{\alpha + N}$ draw $\theta_{N+1} \sim G_0$
+* Else draw some $\theta_1, ..., \theta_N$ uniformly.
+
+The Chinese Restaurant Process describes this generative model using a metaphor. Customers enter a Chineses restaurant with a infinite amount of tables. The first customer enters the restaurant and sits at the first table. The second customer enters the restaurant and decides either to sit with the first customer, or by himself, by opening a new table. In general the $n+1$ customer can either sit to one of the $K$ opened tables or create a new one with probability proportional to the number of customers already sitting there or open a new table with probability proportional to the concentration paramter $\alpha$.
+
+Note that the previous simulation actually exactly follow this process...
+
+
 
 
