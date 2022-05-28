@@ -117,7 +117,7 @@ sharing:
 
 ## => Comments
 ##############################
-staticman_url: https://manuelgloeckler-comments/v3/entry/github/manuelgloeckler/manuelgloeckler.github.io/master/comments
+staticman_url: https://api.staticman.net/v3/entry/github/manuelgloeckler/manuelgloeckler.github.io/master/comments
 comments:
   provider: custom
 
