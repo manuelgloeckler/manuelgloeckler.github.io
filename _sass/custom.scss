@@ -1,3 +1,90 @@
-/* start custom scss snippet */
+body {
+    counter-reset: theorem;
+    counter-reset: lemma;
+}
 
-/* end custom scss snippet */
+.theorem {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+    padding-left: 10px;
+    border-left:10px solid;
+    border-color: rgb(51, 46, 74);
+    background-color: rgb(235, 235, 235);
+}
+.theorem:before {
+    content: "Theorem " counter(theorem);
+    counter-increment: theorem;
+    font-weight: bold;
+    font-style: normal;
+}
+.lemma {
+    display: block;
+    margin: 12px 0; 
+    font-style: italic;
+    padding-left: 10px;
+    border-left:10px solid;
+    border-color: rgb(51, 46, 74);
+    background-color: rgb(235, 235, 235);
+}
+.lemma:before {
+    content: "Lemma " counter(lemma);
+    counter-increment: lemma;
+    font-weight: bold;
+    font-style: normal;
+}
+.proof {
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+}
+.proof:before {
+    content: "Proof.";
+    font-style: italic;
+}
+.proof:after {
+    content: "\25FC";
+    float:right;
+}
+.definition {
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+    padding-left: 10px;
+    border-left:10px solid;
+    border-color: rgb(51, 46, 74);
+    background-color: rgb(235, 235, 235);
+}
+.definition:before {
+    content: "Definition " ;
+    counter-increment: definition;
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .collapsible:hover {
+    background-color: #ccc;
+  }
+  
+  /* Style the collapsible content. Note: hidden by default */
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }

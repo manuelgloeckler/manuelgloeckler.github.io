@@ -1,0 +1,39 @@
+<script> 
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML.includes('[proof]') || (el.innerHTML.includes('[/proof]'))) {
+            el.innerHTML = el.innerHTML.replace('[proof]','<details><summary><i>Proof.</i></summary>\n<div class="proof"> ').replace('[/proof]','</div></details>');
+        }
+    });
+
+</script>
+
+<script> 
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML.includes('[def]') ||(el.innerHTML.includes('[/def]'))) {
+            el.innerHTML = el.innerHTML.replace('[def]','<div class="definition"> ').replace('[/def]','</div>');
+        }
+    });
+
+</script>
+
+<script> 
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML.includes('[theorem]') || (el.innerHTML.includes('[/theorem]'))) {
+            el.innerHTML = el.innerHTML.replace('[theorem]','<div class="theorem"> ').replace('[/theorem]','</div>');
+        }
+    });
+
+</script>
+
+<script> 
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML.includes('[lemma]')||(el.innerHTML.includes('[/lemma]'))) {
+            el.innerHTML = el.innerHTML.replace('[lemma]','<div class="lemma"> ').replace('[/lemma]','</div>');
+        }
+    });
+
+</script>
