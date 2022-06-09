@@ -121,7 +121,7 @@ So this is great and by it we can easily explain how the Fisher information beha
 <dir class="theorem">
 If $X_1, \dots, X_N$ are i.i.d. then
 
-$$ F_{X_1, \dots, X_n}(\phi) = N F_{X_1}(\phi)$$
+$$ F_{X_1, \dots, X_n}(\phi) = N \cdot F_{X_1}(\phi)$$
 </dir>
 
 We can extend Lemma 1 to a more general case, were $X$ and $Y$ are not independent:
@@ -158,16 +158,15 @@ Thus by applying the above lemma we get
 $$ F_x(\phi) = \frac{\phi (1-\phi)}{(\phi (1-\phi)^2} = \frac{1}{\phi (1-\phi)}$$
 which is exactly what we obtained by explicitly calculating it.
 
-Within the Bernoulli example we already observed an close relationship to the variance of the random variable. This relationship is not as universal as you would guess! 
 
-NOT SURE IF THERE ACTUALLY IS ONE ...
+Another very useful property is the connection to the hessian of the log likelihood. In fact in many case this is given as definition. 
 
-Another very usefull property is the connection to the hessian of the log likelihood. 
-
-> Claim: Be $\log q_\phi(x)$ is twice differentiable and be $H_{\log q (x)}$ the corresponding Hessian. Under certain regularity conditions it holds that
-> $$ F_X(\phi) = -\mathbb{E}_{q (x)} \left[ H_{\log q (x)}  \right]$$
-> Proof: We can write the Hessian of the log likelihood as follows
-> $$ H_{\log q (x)}= \nabla_\phi \nabla_\phi^T \log q (x) = \nabla_\phi \frac{\nabla_\phi^T q_\phi(x)}{q (x)} = \frac{ \nabla_\phi \nabla_\phi^T q (x) q_\phi(x) - \nabla_\phi q (x) \nabla_\phi^T q (x)}{q_\phi(x)^2} = \frac{H_{ q (x)}}{q (x)} - \frac{\nabla_\phi q (x) \nabla_\phi^T q (x)}{q (x)^2} $$
+<dir class="theorem">
+Claim: Be $\log q_\phi(x)$ is twice differentiable and be $H_{\log q (x)}$ the corresponding Hessian. Under certain regularity conditions it holds that
+ $$ F_X(\phi) = -\mathbb{E}_{q (x)} \left[ H_{\log q (x)}  \right]$$
+ Proof: We can write the Hessian of the log likelihood as follows
+ $$ H_{\log q (x)}= \nabla_\phi \nabla_\phi^T \log q (x) = \nabla_\phi \frac{\nabla_\phi^T q_\phi(x)}{q (x)} = \frac{ \nabla_\phi \nabla_\phi^T q (x) q_\phi(x) - \nabla_\phi q (x) \nabla_\phi^T q (x)}{q_\phi(x)^2} = \frac{H_{ q (x)}}{q (x)} - \frac{\nabla_\phi q (x) \nabla_\phi^T q (x)}{q (x)^2} $$
+</dir>
 > Which simply follows from the chain and quotient rule of differentiation. Let's apply the expectation to the first term.
 > $$ \mathbb{E}_{q (x)} \left[  \frac{H_{ q (x)}}{q (x)}  \right] = \int H_{ q (x)} dx = \int \nabla_\phi \nabla_\phi^T q (x)dx = \nabla_\phi \nabla_\phi^T \int q (x) dx = \nabla_\phi \nabla_\phi^T 1 = 0$$
 > So this term fanishes, let's apply it to the second term
