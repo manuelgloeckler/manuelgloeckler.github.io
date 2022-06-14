@@ -3,6 +3,8 @@ layout: article
 title: Information geometry and it's application in Machine Learning
 key: A5
 tags: Math
+cover: https://www.researchgate.net/publication/351854812/figure/fig1/AS:1132455809564700@1647009913987/Representation-of-a-2D-statistical-manifold-with-its-tangent-space-at-a-point-th-and-two_Q640.jpg
+comment: true
 ---
 
 Information geometry can be thought as part of the *Information sciences* which study the "communication" between data and families of models. In short, they seek to distill information from data to models. These include information theory but also the fields of probability theory, statistics, machine learning and more. In contrast to these fields however they investigate this geometrically, especially using 

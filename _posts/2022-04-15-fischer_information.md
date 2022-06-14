@@ -6,6 +6,7 @@ tags: Statistics, Math
 aside:
     toc: true
 comment: true
+cover: https://s8.gifyu.com/images/Download.png
 ---
 
 Fischer information plays a pivotal role in machine learning, as we will see in some way or another it will pop up in both Frequentist or Bayesian statistical paradigms. In this post, I will introduce the Fisher information together with some important properties. We will go through several applications and relationships of the Fischer information to other important quantities.
