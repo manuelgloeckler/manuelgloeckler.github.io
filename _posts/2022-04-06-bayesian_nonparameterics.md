@@ -3,15 +3,15 @@ layout: article
 title: An interactive guide through Bayesian Nonparameterics
 key: A1
 tags: Bayesian ML, Statistics, Math
-cover: https://s8.gifyu.com/images/cover_bnp52e0dfab90a319c4.gif
+cover: https://s8.gifyu.com/images/cover_bnp9c3d89a85f1d0055.gif
 comment: true
 ---
 
 Traditional parametric models using a fixed and finite number of parameters can suffer from data over-or under-fitting when there is a mismatch between the complexity of the model (often expressed in terms of the number of parameters), the complexity of the true data generating process, and the amount of available data. As a result, we often have to do *model selection* to choose the right model from an ensemble of possible models. Unfortunately, model selection is an operation that is complicated and tedious, independently of the use of frequentist cross-validation or Bayesian marginal probabilities as the basis for selection.
 
-The *Bayesian nonparametric* approach is an alternative to parametric modeling and selection, by adapting its complexity to the amount of available data or the complexity of the data generating process. The thereby typically unbound complexity mitigates underfitting, while the Bayesian approach for computing full posteriors mitigates overfitting. Note we refer to a model as parametric if it has a finite number of parameters. A nonparametric model in contrast assumes a priori an infinite number of parameters. 
+The *Bayesian nonparametric* approach is an alternative to parametric modeling and selection, by adapting its complexity to the amount of available data or the complexity of the data generating process. The thereby typically unbound complexity mitigates underfitting, while the Bayesian approach for computing full posteriors mitigates overfitting. Note we refer to a model as parametric if it has a finite number of parameters. A nonparametric model in contrast assumes a priori an infinite number of parameters.
 
-A Bayesian nonparametric (BNP) model defines a probability distribution over infinite-dimensional parameter space. This sounds complicated, yet as we will see in practice a BNP uses only a finite subset of the potentially infinite parameters to explain any finite set of observations. 
+A Bayesian nonparametric (BNP) model defines a probability distribution over infinite-dimensional parameter space. This sounds complicated, yet as we will see in practice a BNP uses only a finite subset of the potentially infinite parameters to explain any finite set of observations.
 
 ## A parametric model: Mixture models
 
@@ -34,20 +34,21 @@ For any finite set of $N$ observations $x_n \in \mathbb{R}^d$, the model has $N 
 
 {% include finite_mixture_model.html %}
 
-
-As present within the generative model, $\alpha$ determines the mixing coefficients $\pi$. As $\alpha \rightarrow 0$ the Dirichlet distribution concentrates at the corners of the unit simplex i.e. we only have a few dominant clusters and many very small. As $\alpha \rightarrow \infty$ the distribution converges to a point mass at $1/K$. 
+As present within the generative model, $\alpha$ determines the mixing coefficients $\pi$. As $\alpha \rightarrow 0$ the Dirichlet distribution concentrates at the corners of the unit simplex i.e. we only have a few dominant clusters and many very small. As $\alpha \rightarrow \infty$ the distribution converges to a point mass at $1/K$.
 
 Now for any dataset $X$ we observe, we can infer the parameters just by using Bayes' theorem:
 
 $$ p(Z, \pi, \mu_{1:K}|X) \propto p(X|\mu_{1:K},Z)p(Z|\pi)p(\pi)p(\mu_{1:K}) = \prod_{n=1}^N \mathcal{N}(x_n; \mu_{z_n}, 0.1I)Cat(z_n;\pi)Dir(\pi;\alpha) \prod_{k=1}^K \mathcal{N}(\mu_k;0,I)$$
 
-Whereas we cannot retain a close form solution, we can sample from it using MCMC-methods e.g. Gibbs Sampling. 
+Whereas we cannot retain a close form solution, we can sample from it using MCMC-methods e.g. Gibbs Sampling.
 
 Unfortunately, this model has one limitation. If the data requires more than $K$ cluster centers, then we have a problem. Hence we have to do *model selection* i.e. to we have to choose the best $K$. In the end, we shouldn't need more clusters than data points $N$ we observe, right? That's not always true e.g. in many cases we just did sample from some of the latent clusters yet. If we would collect more and more data we would observe more and more clusters showing up. When there are 1000 latent components and we observe only 100 data points then we observe less than 100 clusters, right?
 
 So let's look what will happen if we sequentially observe one datapoint $x_i$ at a time. There are two events that can happen:
+
 * $x_i$ can be part of a cluster we already observed.
 * $x_i$ can be part of a **new** cluster.
+
 Let's say we have $K=1000$ components. How many points do we need to observe all 1000 components? At which rate do we observe new components? As always try to answer the question yourself, the animation below will help by simulation this process.
 
 {% include rate_of_clusters.html %}
@@ -56,7 +57,7 @@ Thanks to this letting $K \rightarrow \infty$ does not seem as crazy as before, 
 
 ## The Stickbreaking construction
 
-The main problem we will encounter as we let $K \rightarrow \infty$ is that the Dirichlet distribution becomes ill-defined. In the end, how should we even sample a vector of infinite length? At a certain point at least your memory will say goodbye! 
+The main problem we will encounter as we let $K \rightarrow \infty$ is that the Dirichlet distribution becomes ill-defined. In the end, how should we even sample a vector of infinite length? At a certain point at least your memory will say goodbye!
 
 As always the solution is to be lazy! After a thousand data points we only observed 200 clusters in the above simulation, so why should we sample mixture coefficients for all other components, when we can just lazily generate a new one only if we need it. Let's assume $K=2$, an alternative way to sample from a Dirichlet is to use the Beta distribution i.e.
 
@@ -65,6 +66,7 @@ $$ \pi_1 = \mathcal{B}(\alpha_1, \alpha_2) \quad \text{ and } \quad  \pi_2 = 1-\
 It is rather easy to see that $(\pi_1, \pi_2) \sim Dir((\alpha_1,\alpha_2))$ (by just seeing that the marginal distribution of a Dirichlet is always a Beta). So let's generalize this to an arbitrary $K$ which is known as *Stickbreaking*. 
 
 Assume we have a stick of length $1$ (representing all the probability mass). Our goal is to break the strick into $K$ pieces, by definition these pieces must thus sum to one.  We start as following:
+
 * Draw $\phi_1 \sim \mathcal{B}(\alpha_1, \sum_{k=2}^K \alpha_k)$. Set $\pi_1 = \phi_1$ and break a part of lenght $\pi$ from the stick.
 * Draw $\phi_2 \sim \mathcal{B}(\alpha_2, \sum_{k=3}^K \alpha_k)$. The remaining stick has length $(1-\pi_1)$, thus break of a part of length $\pi_2 = \phi_2(1-\pi_1)$.
 * ...
@@ -108,13 +110,13 @@ So let's look at some samples from this process. Note that we actually cannot sa
 
 ## Dirichlet process: A bit more formal
 
-Be $\Theta$ be a parameter space, be $G_0$ a base measure over $\Theta$. Again we draw $\pi \sim GEM(\alpha)$ and $\theta_k \sim G_0$. Then we call $G = \sum_{k=1}^\infty \pi_k \delta_{\theta_k}$ a draw from a **Dirichlet process (DP)** $G \sim DP(\alpha, G_0)$. Here we denote with $\delta_{\theta_k}$ a indicator function on a specific $\theta_k$ sampled from the base measure. Thus every draw from a DP will be this infinite object! We can recover the previous scenario by just choosing $\Theta = \mathbb{R}^2$ and $G_0 = \mathcal{N}(\mu_0, \Sigma_0)$. Thus all the $\theta_k$ here now correspond to the infinite number of possible cluster centers, each associated with a specific mixing coefficient $\pi_k$. 
+Be $\Theta$ be a parameter space, be $G_0$ a base measure over $\Theta$. Again we draw $\pi \sim GEM(\alpha)$ and $\theta_k \sim G_0$. Then we call $G = \sum_{k=1}^\infty \pi_k \delta_{\theta_k}$ a draw from a **Dirichlet process (DP)** $G \sim DP(\alpha, G_0)$. Here we denote with $\delta_{\theta_k}$ a indicator function on a specific $\theta_k$ sampled from the base measure. Thus every draw from a DP will be this infinite object! We can recover the previous scenario by just choosing $\Theta = \mathbb{R}^2$ and $G_0 = \mathcal{N}(\mu_0, \Sigma_0)$. Thus all the $\theta_k$ here now correspond to the infinite number of possible cluster centers, each associated with a specific mixing coefficient $\pi_k$.
 
 In fact, these objects $G$ have a specific property. The are measures over the parameter space $\Theta$ (in fact even a probability measure!). To see that consider some set $A \subset \Theta$ then
 $$ G(A) = \sum_{k=1}^\infty \pi_k \delta_{\theta_k}(A) = \sum_{k: \theta_k \in A} \pi_k$$
 So in fact the DP is a distribution over **random measures**.
 
-So that's great, but wait we call it a *Dirichlet* *process*. So, it should be a *stochastic process* i.e. an indexed collection of random variables. And it should have something in common with Dirichlet distribution, right? So what are our random variables, are they Dirichlet distributed? And what is our index set? 
+So that's great, but wait we call it a *Dirichlet* *process*. So, it should be a *stochastic process* i.e. an indexed collection of random variables. And it should have something in common with Dirichlet distribution, right? So what are our random variables, are they Dirichlet distributed? And what is our index set?
 
 So let's consider some fixed set $A \subset \Theta$. Then $G(A)$ is random, right? Simply because $G$ is random. In fact by construction we can easily see that $G(A) \in [0,1]$. This looks typically like a marginal sample drawn from a Dirichlet distribution, right? So let's try to complete it. If we consider $B = \Theta \backslash A$, it's easy to see that by construction $G(A) + G(B) = 1$. So let's consider the random vector $(G(A), G(B))$. We know that any realization must sum to one, so it really looks like a draw from Dirichlet distribution. But what are the parameters? Intuitively it must be proportional to the volume of $A$ under the base measure $G_0$, as if $A$ covers most of the support of $G_0$ then most of the indicator functions must be within it. And yes that's exactly right in fact it turns out that $(G(A), G(B)) \sim Dirichlet((\alpha G_0(A), \alpha G_0(B)))$ ([Here the details](http://www.people.vcu.edu/~dbandyop/pubh8472/StickBreaking.pdf)). So indeed we found that a partition $A,B$ of $\Theta$, will generate a random vector distributed according to a Dirichlet distribution. In fact, this will hold for any finite partition of $\Theta$! And hence we found the index set of the stochastic process, these are all the different partitions that exist. All this now allows us to formally define this process:
 
@@ -122,7 +124,7 @@ So let's consider some fixed set $A \subset \Theta$. Then $G(A)$ is random, righ
  (Dirichlet Process): A Dirichlet Process is a distribution of a random probability measure $G$ over a measurable space $(\Theta, \sigma(\Theta))$, such that for any finite partition $(A_1, \dots, A_K)$ of $\Theta$, we have
 
  $$ (G(A_1), \dots, G(A_K)) \sim Dir(\alpha G_0(A_1), \dots, \alpha G_0(A_r)) $$
- 
+
  Here $G(A_i) = \int_{A_i} dG$ and $G_0(A_i) = \int_{A_i}dG_0$*
 </dir>
 
@@ -137,7 +139,6 @@ $$ \mu_k \sim G$$
 $$ x_n \sim \mathcal{N}(\mu_k, \Sigma)$$
 
 Note that we no longer require to use the latent variables $z_n$ i.e. the cluster memberships.
-
 
 ## The Dirichlet process posterior
 
@@ -176,6 +177,7 @@ Thus with $G$ marginalized out
 $$ \theta_{N+1}|\theta_1, \dots, \theta_N \sim \frac{\alpha G_0 + \sum_{i=1}^N \delta_{\theta_i}}{\alpha + N}$$
 
 Thus the posterior base measure is also the predictive distribution, which indeed allows us to draw samples as follows:
+
 * With probability $\frac{\alpha}{\alpha + N}$ draw $\theta_{N+1} \sim G_0$
 * Else draw some $\theta_1, ..., \theta_N$ uniformly.
 
@@ -185,12 +187,20 @@ Note that the previous simulation actually exactly follows this process.
 
 ## Applications
 
+In this section we finally come to some usefull applications. 
+
 ### Dirichlet Process Mixture posterior
 
 Above we already 
 
+{% include trinket-open %}
+# Loading tweet data
+{% include trinket-close %}
 
 
+### Simulation-based inference
+
+Whereas the last example (an most of this post) got an fully Bayesian treatment we for now will switch to the dark side. 
 
 
 
