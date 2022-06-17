@@ -38,7 +38,7 @@ As present within the generative model, $\alpha$ determines the mixing coefficie
 
 Now for any dataset $X$ we observe, we can infer the parameters just by using Bayes' theorem:
 
-$$ p(Z, \pi, \mu_{1:K}|X) \propto p(X|\mu_{1:K},Z)p(Z|\pi)p(\pi)p(\mu_{1:K}) = \prod_{n=1}^N \mathcal{N}(x_n; \mu_{z_n}, 0.1I)Cat(z_n;\pi)Dir(\pi;\alpha) \prod_{k=1}^K \mathcal{N}(\mu_k;0,I)$$
+$$ p(Z, \pi, \mu_{1:K}\mid X) \propto p(X\mid \mu_{1:K},Z)p(Z\mid \pi)p(\pi)p(\mu_{1:K}) = \prod_{n=1}^N \mathcal{N}(x_n; \mu_{z_n}, 0.1I)Cat(z_n;\pi)Dir(\pi;\alpha) \prod_{k=1}^K \mathcal{N}(\mu_k;0,I)$$
 
 Whereas we cannot retain a close form solution, we can sample from it using MCMC-methods e.g. Gibbs Sampling.
 
@@ -86,7 +86,9 @@ This idea turns out to be (almost) true, we indeed can generalize the procedure 
 
 By this way we generate a infinite sequence $\pi_1, \pi_2, \cdots$ from which we at least can guarantee that $\sum_{k=1}^\infty \pi_k \leq 1$. But wait, why does it not equal one?
 
-This can be easily seen with an counter-example: Consider the sequence $\pi_i = 1/(2^n+2)$, then $\sum_{i=1}^\infty \pi_i = 1/2 \leq 1$. Thus we have to make sure that we cannot sample such sequences, or at least that the probability to sample them is zero (the set of such sequences should have zero measure). As it turns out that we actually can achieve this by just restricting the set of parameters $a_i, b_i$ within the process (see Ishwaran, James 2001).
+This can be easily seen with an counter-example: Consider the sequence $\pi_i = 1/(2^n+2)$, then $\sum_{i=1}^\infty \pi_i = 1/2 \leq 1$. Thus we have to make sure that we cannot sample such sequences, or at least that the probability to sample them is zero (the set of such sequences should have zero measure). As it turns out that we actually can achieve this by just restricting the set of parameters $a_i, b_i$ within the process (see Ishwaran, James 2001). In practise however we often converge rather quick two one and the process is typically truncated after a while. In any way at some point floating point precission will become a problem. Here you can try it yourself:
+
+<iframe frameborder="0" width="100%" height="800px" src="https://replit.com/@manuelgloeckler/stickbreaking?lite=true#main.py"></iframe>
 
 As it turns out if we choose $a_1=1$ and $\beta = \alpha > 0$, then with probability 1 all sequence we sample will converge to 1! That's perfect and all we need, we call the underlying process now **Dirichlet process stick-breaking**, the underlying distribution is called the **GEM** distribution. We again can look at the number of observed "clusters", if you give the below animation infinite time you will see that indeed it is going to infinity. In contrast to the previous plot, however, the only thing which will stop you here is your finite time and memory...
 
@@ -145,20 +147,20 @@ Note that we no longer require to use the latent variables $z_n$ i.e. the cluste
 Let $G \sim DP(\alpha, G_0)$. Since $G$ is itself a (random) distribution, we can in draw samples $\theta_1, \dots, \theta_n \sim G$. Note that $\theta_i's$ take values in $\Theta$ since $G$ is a distribution over $\Theta$. Let's assume we are interested in the posterior distribution of $G$ given that we observe $\theta_1, \dots, \theta_n$.
 
 Let $A_1, \dots, A_r$ be a finite measurable partition of $\Theta$. Be $n_k = \sum_{i=1}^n I(\theta_i \in A_k)$ the number of observed values in $A_k$. Then by the conjugacy between the Dirichlet and multinomial distribution, we have
-$$ (G(A_1,), \dots, G(A_r)) | \theta_1, \dots, \theta_n \sim Dir(\alpha G_0(A_1) + n_1, \dots, \alpha G_0(A_r) + n_r)$$
+$$ (G(A_1,), \dots, G(A_r)) \mid  \theta_1, \dots, \theta_n \sim Dir(\alpha G_0(A_1) + n_1, \dots, \alpha G_0(A_r) + n_r)$$
 Since the above is ture for all finite measurale paritions, the posterior distribution over G must be a DP as well (as all marginals are still Dirichlet). So how do we have to update the parameters? As it turns out we only have to investigate our definition:
 
 <dir class="definition">
  (Dirichlet Process Posterior): Be $G \sim DP(\alpha, G_0)$*. Be $\theta_1, \dots, \theta_n \sim G$, then
 
- $$ G|\theta_1, \dots, \theta_N \sim DP(\alpha + N, \hat{G_0}) $$
+ $$ G\mid \theta_1, \dots, \theta_N \sim DP(\alpha + N, \hat{G_0}) $$
  
  Here $\hat{G_0} = \frac{\alpha G_0 + \sum_{i=1}^N \delta_{\theta_i}}{\alpha + N}$
 </dir>
 You can verify easily that for any finite partition, we obtain a Dirichlet posterior distribution as derived above.
 
 Notice that we can rewrite the posterior as following
-$$ G|\theta_1, \dots,\theta_n \sim DP\left(\alpha + N, \frac{\alpha}{\alpha + N} G_0 + \frac{N}{\alpha + N} \frac{\sum_{i=1}^N \delta_{\theta_i}}{n}\right)$$
+$$ G\mid \theta_1, \dots,\theta_n \sim DP\left(\alpha + N, \frac{\alpha}{\alpha + N} G_0 + \frac{N}{\alpha + N} \frac{\sum_{i=1}^N \delta_{\theta_i}}{n}\right)$$
 Thus the posterior is a weighted combination of the base distribution $G_0$ and the empirical distribution. The weight associated with the base distribution is proportional to $\alpha$, while the empirical distribution has a weight proportional to the number of observations $N$. Thus we can interpret $\alpha$ as the mass associated with the prior, taking $\alpha \rightarrow 0$ will render the prior non-informative in the sense that the predictive distribution is just given by the empirical distribution.
 
 You can play with the posterior distribution in the below animation. You can add observations by just taping into the figure with your mouse (a red dot will appear!). At this moment you condition our previous prior on this particular observation. You can look at multiple samples for different alpha and verify the above intuition we build up.
@@ -171,10 +173,10 @@ Note: We draw the means from the GP and within the above Dirichlet Mixture simul
 
 Consider again $G \sim DP(\alpha, G_0)$ and drawing an i.i.d. sequence $\theta_1, \theta_2, \dots \sim G$. Then consider the predicitve distribution for $\theta_{n+1}$, conditioned on $\theta_1, \dots, \theta_n$ with $G$ marginalized out.
 
-Since $\theta_{n+1}| G, \theta_1, \dots, \theta_n \sim G$, as $\theta_{n+1}$ is conditionally independent of $\theta_1, \dots, \theta_n$ given $G$. We have that
-$$ P(\theta_{n+1} \in A |\theta_1, \dots, \theta_n) = \mathbb{E}\left[ G(A) | \theta_1, \dots, \theta_N \right] = \frac{1}{\alpha + N} \left( \alpha G_0(A) + \sum_{i=1}^N \delta_{\theta_i}(A) \right)$$
+Since $\theta_{n+1}\mid G, \theta_1, \dots, \theta_n \sim G$, as $\theta_{n+1}$ is conditionally independent of $\theta_1, \dots, \theta_n$ given $G$. We have that
+$$ P(\theta_{n+1} \in A \mid \theta_1, \dots, \theta_n) = \mathbb{E}\left[ G(A) \mid  \theta_1, \dots, \theta_N \right] = \frac{1}{\alpha + N} \left( \alpha G_0(A) + \sum_{i=1}^N \delta_{\theta_i}(A) \right)$$
 Thus with $G$ marginalized out
-$$ \theta_{N+1}|\theta_1, \dots, \theta_N \sim \frac{\alpha G_0 + \sum_{i=1}^N \delta_{\theta_i}}{\alpha + N}$$
+$$ \theta_{N+1}\mid \theta_1, \dots, \theta_N \sim \frac{\alpha G_0 + \sum_{i=1}^N \delta_{\theta_i}}{\alpha + N}$$
 
 Thus the posterior base measure is also the predictive distribution, which indeed allows us to draw samples as follows:
 
@@ -191,16 +193,65 @@ In this section we finally come to some usefull applications.
 
 ### Dirichlet Process Mixture posterior
 
-Above we already 
-
-{% include trinket-open %}
-# Loading tweet data
-{% include trinket-close %}
+Let's try to apply what we have learned to real non-trivial data. Namely we will use as dataset tweets from former US president Donald Trump.
 
 
-### Simulation-based inference
+### Bayesian bootstrap inference
 
-Whereas the last example (an most of this post) got an fully Bayesian treatment we for now will switch to the dark side. 
+Whereas the last example (and most of this post) got an fully Bayesian treatment we for now we want to draw a little inspiration from the dark side of the force: Let's forget the posterior as ultimate goal of inference for a moment.
+
+Let's assume our observations are sample from an unknown generative process $x_1, \dots, x_n \sim \mathbb{P}^\star$. We assume that this can be written as $\mathbb{P}^\star = p_{\theta^\star}$ for some unknown parameter $\theta^\star$. That's not really new and is also required for a well-specified Bayesian model.
+
+If we would do Bayesian inference. We would assign an prior on $\theta$ and compute the posterior $p(\theta \mid x_{1:n})$. Clearly the posterior should assigne high density for $\theta's$ around $\theta^\star$ and agree with our prior expecations. Yet for any finite number of observations (and proper priors and likelihoods) the posterior will be uncertain about $\theta^\star$.
+
+For a moment let's assume we know $\mathbb{P}^\star$, then inference on $\theta^\star$ is easy. We just solve e.g.
+
+$$ \theta^\star = \arg \min_{\theta} D_{KL}(P^\star \mid \mid p_\theta) = \arg \min_{\theta} \mathbb{E}_{P^\star}\left[ -\log p_\theta(x)\right]. $$
+
+No uncertainty about $\theta^\star$ arises! Yet in practise we typically do not have access $P^\star$, put only a set of i.i.d. observations i.e. an empirical approximation $$ \mathbb{P}_n = \frac{1}{n} \sum_{i=1}^n \delta_{x_i} $$. We still can try to recover $\theta^\star$ by solving
+
+$$ \hat{\theta} = \arg \min_{\theta} -\frac{1}{N}\sum_{i=1}^N \log p_\theta(x_i). $$
+
+Which leads to the maximum liklihood estimator. Yet, different $\mathbb{P}_n^{(i)}$ lead to different estimates $\hat{\theta}^{(i)}$, so which $\hat{\theta}^{(i)}$ we should trust. Which one is closest to $\theta^\star$? Fundamentally uncertainty arises every time as long $n < \infty$. So despite no Bayesian treatment, we again arive at some distribution over $\theta$ ... (it's not the same as the posterior, but is very releated known as bootstrap distribution).
+
+Yet to sample from this distribution we require a number of independent datasets of size $n$ i.e.
+$$\mathbb{P}_n^{(1)}, \dots, \mathbb{P}_n^{(m)}$$
+ , which is even harder than before. In frequentist statistics there is a simple but efficient approximation, known as *bootstrap* estimates. There we typically start with a single dataset $\mathbb{P}_N$. Then just subsample it $m$ time i.e.  $$\mathbb{P}_n^{(j)} = \frac{1}{n}\sum_{i=1}^n \delta_{x_i}$$ for $x_i \sim \mathbb{P}_N$. It is easy to see that this is a good approximation only if $N >> n$. So let's try to be a bit more Bayesian.
+
+We just learned that we can efficiently compute posterior on a distribution over distributions! Thus if we don't know $P^\star$, but have some observations $x_1, \dots, x_n \sim \mathbb{P}^\star$, then why shouldn't we just infer the posterior over $P^\star$. If we choose an Dirchlet process prior on it, then as we saw the posterior is closed from and computationaly efficient. As a result we then can sample from a "bootstrap posterior" over $\theta$ by just sampling $\mathbb{P}^{(j)} \sim \mathbb{P}\mid x_1, \dots, x_n$. Instead of an empirical estimate we now can estimate $\theta^\star_{(j)}$ exactly given $\mathbb{P}^{(j)}$.
+
+Let's consider a easy example. Consider the true generative process
+$$ \mathbb{P}^\star = \mathcal{N}(x; \theta^\star, \sigma^2).$$
+We are interested in estimating $\theta^\star$. Our prior over it is a Dirichlet process i.e.
+
+$$ DP(\alpha, G_0) \qquad \text{ with } G_0 = \mathcal{N}(0, 1)$$
+
+We condition the prior on data and obtain the posterior
+
+$$ \mathbb{P}\mid x_1, \dots, x_n \sim DP\left(\alpha + N, \frac{\alpha}{\alpha + N} G_0 + \frac{N}{\alpha + N} \frac{\sum_{i=1}^N \delta_{x_i}}{n}\right) $$
+
+We thus can get samples $\mathbb{P}^{(j)} \sim \mathbb{P}\mid x_1, \dots, x_n$ from which we know it has the form
+$$ \mathbb{P}^{(j)} = \sum_{k=1}^\infty \pi_k \delta_{x_k}$$
+
+We obtain that 
+
+$$ \theta^\star = \arg \min_\theta D_{KL}(\mathbb{P}^{(j)}\mid  \mathcal{N}(x; \theta, 1)) = \arg \min_\theta - \sum_{k=1}^\infty \pi_k \log p_\theta(x_k)$$
+
+$$ = \arg \min_\theta \sum_{k=1}^\infty \pi_k (x_k - \theta)^2 $$
+
+Diverentiating with respect to $\theta$ we get
+
+$$\nabla_\theta \sum_{k=1}^\infty \pi_k (x_k - \theta)^2 = 2 \sum_{k=1}^\infty \pi_k \theta - 2 \sum_{k=1}^\infty \pi_k x_k \iff \theta^\star_{(j)} = \sum_{k=1}^\infty \pi_k x_k  $$
+
+And that's all. Sounds complicated. Sounds wierd, but is surprisingly easy to implemenet. You can test it here:
+
+<iframe frameborder="0" width="100%" height="800px" src="https://replit.com/@manuelgloeckler/test?lite=true#main.py"></iframe>
+
+You can play around a bit with the "hyperparameters" i.e. $\alpha$ and the base measure $G_0$.
+
+
+
+
 
 
 
