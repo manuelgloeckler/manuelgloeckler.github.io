@@ -193,7 +193,25 @@ In this section we finally come to some usefull applications.
 
 ### Dirichlet Process Mixture posterior
 
-Let's try to apply what we have learned to real non-trivial data. Namely we will use as dataset tweets from former US president Donald Trump.
+Let's try to apply what we have learned to real non-trivial data. Namely we will use as dataset tweets from former US president Donald Trump (I will use the following dataset which you can also find on [Github](https://github.com/MarkHershey/CompleteTrumpTweetsArchive)).
+
+Our task will be to collect a number of topics that Donal Trump cares about during or after his presidentship. We define a *topic* as an set of keywords. We assign a tweet to a certain topic if the tweet contains many relevant keywords. We do not know the actualy number of topics so we may aprior assume an infinite number of them.
+
+The data we have is rather complicated, it's natural language with several twitter artifacts e.g. retweets (which are not actually by Donal Drump so we should exclude them). We are only interested in *topics* so we may reduce the tweets just to a list of certain keywords. We end up with a much simpler *tweet2vec* embedding. Each vector has the lenght of a dictionary of keywords (I choose 400) and contains the number of times each of the keywords appeared in the tweet.
+
+After this simpliciations we can come up a rather simple generative model for this data:
+
+$$ G \sim DP(\alpha, Dir(\gamma))$$
+
+$$ \theta_k \sim G$$
+
+$$ x_n \sim Cat(\theta_k)$$
+
+
+In the end we 
+
+
+
 
 
 ### Bayesian bootstrap inference

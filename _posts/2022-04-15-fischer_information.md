@@ -24,7 +24,7 @@ Be $\log p_\theta(x)$ differentiable in $\theta$ almost everywhere and let the s
 $$ \mathbb{E}_{p_\theta(x)} \left[s_x(\theta)\right] =  \mathbb{E}_{p_\theta(x)}  \left[ \nabla_\theta \log p_\theta(x)\right] = 0 $$
 [/theorem]
 [proof]
-As we can interchange integration and differentiation under above regularity conditions it holds that
+As we can interchange integration and differentiation under the above regularity conditions it holds that
 $$ \begin{aligned}\mathbb{E}_{p_\theta(x)}  \left[ \nabla_\theta \log p_\theta(x)\right]  &= \int \frac{\nabla_\theta p_\theta(x)}{p_\theta(x)} p_\theta(x)dx \\ &= \int \nabla_\theta q (x)dx \\&= \nabla_\theta \int p_\theta(x)dx \\&= \nabla_\theta 1\\& = 0 \end{aligned} $$
 [/proof]
 
@@ -83,7 +83,7 @@ Let's look also at a more general family, which includes the previous example: T
 
 $$ p_\eta (x) = h(x) \exp(\eta^T T(x) - Z(\eta)) $$
 
-with $Z(\eta) = \log \int h(x) \exp(\eta^TT(x)) dx$. The log likelihood is thus for $N$ observations $x_1, ..., x_N$ is thus given by
+with $Z(\eta) = \log \int h(x) \exp(\eta^TT(x)) dx$. The log-likelihood is thus for $N$ observations $x_1, ..., x_N$ is thus given by
 
 $$ \log p_\eta(X) = \sum_{i=1}^N \eta^T T(x_i) - Z(\eta) + \log h(x_i)$$
 
@@ -148,18 +148,18 @@ As above just using the product rule $\log p(X,Y) = \log p(X|Y) + \log p(Y) = \l
 We already saw that the Fisher information depends on the parameterization of our statistical model. So let's try to exactly quantify how different parameterizations do change the Fisher information.
 
 <dir class="lemma">
-Be f a totally differentaibe map from parameter with $\eta = f(\theta)$, where both parameters encode the same statistical model. Be $J_f = \nabla_\theta f(\theta)$ the Jacobian matrix, then
+Be f a totally differentiable map from parameter with $\eta = f(\theta)$, where both parameters encode the same statistical model. Be $J_f = \nabla_\theta f(\theta)$ the Jacobian matrix, then
 $$ F_{x}(\theta) = J_f^T F_X(f(\theta)) J_f $$
 </dir>
 [proof]
-This simply folows from the chain rule of differentiation. Notice that we can write
+This simply follows from the chain rule of differentiation. Notice that we can write
 \[$$\displaystyle \begin{aligned}s_x(\theta)= \nabla_\theta \log p_{f(\theta)}(x) = \nabla_\theta f(\theta) \nabla_\eta \log p_\eta(x) = J_f^T \nabla_\eta \log p_\eta(x) = J_f^T s_x(\eta) \end{aligned}$$ <br />
-By the definition of Fisher information we have that 
+By the definition of Fisher information, we have that 
 $$ F_x(\theta) = \mathbb{E}_{p_\theta}\left[s_x(\theta)s_x(\theta)^T \right] = \mathbb{E}_{p_\theta}\left[J_f^Ts_x(\eta)s_x(\eta)^TJ_f \right] = J_f^T F_x(\eta) J_f$$ <br />
 which completes the proof.
 [/proof]
 
-Recall that the natural parameters of a Bernoulli distribution are $\eta = f(\theta) = \log \frac{\theta}{1-\theta}$. Thus $\nabla_\theta f(\theta) = \frac{1}{\theta(1-\theta)}$, we had that the Fisher information of an exponential family equals the covariance of the test statistic. For a Bernoulli variable we thus have
+Recall that the natural parameters of a Bernoulli distribution are $\eta = f(\theta) = \log \frac{\theta}{1-\theta}$. Thus $\nabla_\theta f(\theta) = \frac{1}{\theta(1-\theta)}$, we had that the Fisher information of an exponential family equals the covariance of the test statistic. For a Bernoulli variable, we thus have
 
 $$  F_x(\eta) = f^{-1}(\eta) (1- f^{-1}/\eta) = \theta (1-\theta)$$
 
@@ -175,7 +175,7 @@ Another very useful property is the connection to the Hessian of the log-likelih
  $$ F_X(\theta) = -\mathbb{E}_{p_\theta (x)} \left[ H_{\log q (x)}  \right]$$
  </dir>
  [proof]
-  We can write the Hessian of the log likelihood as follows
+  We can write the Hessian of the log-likelihood as follows
  $$ H_{\log q (x)}= \nabla_\theta \nabla_\theta^T \log q (x) = \nabla_\theta \frac{\nabla_\theta^T p_\theta(x)}{q (x)} = \frac{ \nabla_\theta \nabla_\theta^T q (x) p_\theta(x) - \nabla_\theta q (x) \nabla_\theta^T q (x)}{p_\theta(x)^2} = \frac{H_{ q (x)}}{q (x)} - \frac{\nabla_\theta q (x) \nabla_\theta^T q (x)}{q (x)^2} $$ <br />
  Which simply follows from the chain and quotient rule of differentiation. Let's apply the expectation to the first term.
  $$ \mathbb{E}_{q (x)} \left[  \frac{H_{ q (x)}}{q (x)}  \right] = \int H_{ q (x)} dx = \int \nabla_\theta \nabla_\theta^T q (x)dx = \nabla_\theta \nabla_\theta^T \int q (x) dx = \nabla_\theta \nabla_\theta^T 1 = 0$$ <br />
@@ -192,7 +192,7 @@ This allows us to interpret the Fisher information as the average curvature of t
   <img src="../../../assets/normal_high_variance.png" />
   <img src="../../../assets/normal_low_variance.png" />
   <img src="../../../assets/student_t.png" />
-  <figcaption> On the left I plot the log likelihood functions evaluated at several samples $x_i \sim \mathcal{N}(x;\mu^*, 25)$. The red bar indicates the ground truth parameter $\mu^* = 5$. The central plots show the distribution of scores, with estimated empirical variance. According to Theorem 1 the mean must be zero. The last plot shows the distribution of second derivatives, note that for Gaussian cases this is constant. The orange bar, indicates the expected value. According to Theorem 3 this corresponds to the negative variance of the score.  </figcaption>
+  <figcaption> On the left I plot the log-likelihood functions evaluated at several samples $x_i \sim \mathcal{N}(x;\mu^*, 25)$. The red bar indicates the ground truth parameter $\mu^* = 5$. The central plots show the distribution of scores, with estimated empirical variance. According to Theorem 1, the mean must be zero. The last plot shows the distribution of second derivatives, note that for Gaussian cases this is constant. The orange bar indicates the expected value. According to Theorem 3, this corresponds to the negative variance of the score.  </figcaption>
 </figure>
 </p>
 
@@ -205,23 +205,23 @@ Be $p_\theta(x)$ some statistical model with Fisher information matrix $F_x(\the
 $$ D_{KL}(p_\theta(x)||p_{\theta + \delta}(x)) = \frac{1}{2} \delta^T F_x(\theta) \delta + o(||\delta||^2)$$
 </dir>
 [proof]
-It follows form a second order Taylor expansion around $\theta$. For notational simplicity be $\theta' = \theta + \delta$, then <br />
+It follows to form a second order Taylor expansion around $\theta$. For notational simplicity be $\theta' = \theta + \delta$, then <br />
 $$ \begin{aligned} D_{KL}(p_\theta(x) ||  p_{\theta'}(x)) \approx \ & D_{KL}(p_\theta(x) || p_{\theta}(x)) \ + \\ &(\nabla_{\theta'}^TD_{KL}(p_\theta || p_{\theta'})\mid_{\theta'=\theta}) (\theta' - \theta) \ + \\ &\frac{1}{2}(\theta' - \theta)^T\left(\nabla_{\theta'}\nabla_{\theta'}^TD_{KL}(p_\theta || p_{\theta'})\mid_{\theta'=\theta}\right) (\theta' - \theta) \end{aligned} $$ <br />
-By definition $\theta' - \theta) = \delta$. Further the first term vanishes once evaluated at $\theta' = \theta$, by the properties of a divergence.  For the first order term we have <br />
+By definition $\theta' - \theta) = \delta$. Further, the first term vanishes once evaluated at $\theta' = \theta$, by the properties of a divergence.  For the first order term, we have <br />
 $$ \begin{aligned} \nabla_{\theta'}D_{KL}(p_\theta || p_{\theta'}) & = \nabla_{\theta'} \mathbb{E}_{p_\theta} \left[ \log \frac{p_{\theta}(x)}{p_{\theta'}(x)} \right] \\ &= \mathbb{E}_{p_\theta} \left[ \nabla_{\theta'}\log p_{\theta}(x) - \nabla_{\theta'}\log p_{\theta'}(x) \right] \\&= -\mathbb{E}_{p_\theta} \left[ \nabla_{\theta'}\log p_{\theta'}(x) \right] \end{aligned}$$ <br />
 which vanishes once we evaluate the term at $\theta' = \theta$, due to Theorem 1. So only the second order term remains. Be $H_{\log p_{\theta'}(x)} = \nabla_{\theta'}^T\nabla_{\theta'} \log p_{\theta'}(x)$ the Hessian matrix. Then we can write Taylor expansion as follows <br />
 $$ D_{KL}(p_\theta(x) || p_{\theta + \delta}(x)) = \frac{1}{2} \delta^T \mathbb{E}_{p_\theta(x)}\left[  -H_{\log p_{\theta'}(x)} \mid_{\theta' = \theta}\right] \delta + o(||\delta||^2) = \delta^T F_x(\theta) \delta + o(||\delta||^2)$$ <br />
-which proofs the statement.
+which proves the statement.
 [/proof]
 
-Within the Bernoulli example, we already observed a close relationship to the variance of the random variable. This relationship is not as universal as you would guess! At least within the exponential family, there is a clear connection to the covariance of the test statistic. Yet, recall that this is only with respect to the natural parameters. In general, we can relate these quantities through a lower bound: 
+Within the Bernoulli example, we already observed a close relationship to the variance of the random variable. This relationship is not as universal as you would guess! At least within the exponential family, there is a clear connection to the covariance of the test statistic. Yet, recall that this is only for the natural parameters. In general, we can relate these quantities through a lower bound: 
 
 And here are some other nice properties
 <dir class=theorem>
  The Fisher information satisfies the following properties <br />
   (i)  $F(\theta)$ is symmetric and positive semi-definite. <br />
   (ii) $F(\theta)$ is positive definite if the statistical model is identifiable (there cannot exist two parameters $\theta_i \neq \theta_j$ such that $p_{\theta_i} = p_{\theta_j}$)<br />
-  (iii) If $[\theta]_i$ and $[\theta]_j$ are independent then $[F(\theta)]_{ij} = 0$ i.e. then $[\theta]_i$ and $[\theta]_j$ can be estimated seperatly <br />
+  (iii) If $[\theta]_i$ and $[\theta]_j$ are independent then $[F(\theta)]_{ij} = 0$ i.e. then $[\theta]_i$ and $[\theta]_j$ can be estimated separately <br />
 </dir>
 [proof]
  Proof:: You can do this, or I someday in the future ...
@@ -239,22 +239,22 @@ As we will see in each of these steps the Fisher information will be involved in
 
 ### Proposing an estimator
 
-An estimator is typically just a function $f : X^N \rightarrow \theta$, which maps a set of observations to a specific parameter. Yet in certain cases, it may be less practical to work with the raw data and we instead want to preprocess it. We may even use a statistic to summarize the data, i.e. $T: X^N \rightarrow \mathcal{T}$. This may simplify the design of an estimator significantly as we now only have to consider a single or a few statistics. Yet, do we lose information by just considering the statistic? Most information should always be within the raw data, right? This is indeed true (according to Fisher information) !
+An estimator is typically just a function $f : X^N \rightarrow \theta$, which maps a set of observations to a specific parameter. Yet in certain cases, it may be less practical to work with the raw data and we instead want to preprocess it. We may even use a statistic to summarize the data, i.e. $T: X^N \rightarrow \mathcal{T}$. This may simplify the design of an estimator significantly as we now only have to consider a single or a few statistics. Yet, do we lose information by just considering the statistic? Most information should always be within the raw data, right? This is indeed true (according to Fisher information)!
 
 <div class="theorem">
- (Data-processing inequality):   Be $X$ an random variable and be $T(X)$ an arbitrary transformation independent of $\theta$. Then
+ (Data-processing inequality):   Be $X$ a random variable and be $T(X)$ an arbitrary transformation independent of $\theta$. Then
  $$ F_{T(X)}(\theta) \leq F_X(\theta)$$
-Where for matrices we use the standard Loewner order i.e. $A \leq B \iff A - B$ is positive semi-definite. The inequality is an equality if and only if $T$ is a sufficient statistic.
+Where for matrices we use the standard Loewner order i.e. $A \leq B \iff A - B$ is positive semi-definite. The inequality is equality if and only if $T$ is a sufficient statistic.
 </div>
 [proof]
 As the Fisher information satisfies the additive chain rule it follows that for any random variable $Y$ we have that <br />
 $$ F_{Y, X}(\theta) = F_{Y| X}(\theta) + F_{X}(\theta) \geq F_X(\theta)$$ <br />
-where the inequality holds because $F_{Y| X}(\theta)$ is postive semi definite. Thus it follows that <br />
+where the inequality holds because $F_{Y| X}(\theta)$ is positive semi-definite. Thus it follows that <br />
 $$ F_{T(X)}(\theta) \leq F_{T(X), X}(\theta) = \underbrace{F_{T(X)|X}(\theta)}_{=0} + F_X(\theta) = F_X(\theta).$$ <br />
 Here $F_{T(X)|X}(\theta) = 0$ as $T(X)$ is a deterministic transform of $X$ and thus independent of $\theta$ given $X$.
 [/proof]
 
-So that's nice that Fisher information does indeed follow our intuition. So let's start to do inference. The most common type to obtain an estimator $f$ of data is the maximum likelihood method. We typically propose some family of parametric models $\mathcal{F} =\{ p_\theta \mid \theta \in \theta \}$, given some data $x_1, \cdots, x_n \sim p$ we then select 
+So that's nice that Fisher's information does indeed follow our intuition. So let's start to do inference. The most common type to obtain an estimator $f$ of data is the maximum likelihood method. We typically propose some family of parametric models $\mathcal{F} =\{ p_\theta \mid \theta \in \theta \}$, given some data $x_1, \cdots, x_n \sim p$ we then select 
 
 $$ \hat{\theta} = \arg\max_{\theta \in \theta} \sum_{i=1}^n \log p_\theta(x_i)$$
 
@@ -286,7 +286,7 @@ test
 
 This is nice because it lets us evaluate the efficiency of estimators. Hence we call an estimator *efficient* if the variance equals the Cramér Rao lower bound.
 
-In general, the distribution of an arbitrary statistical estimator can become very complicated. Yet, to be able to run statistical tests or construct confidence intervals, we have to know the actual distribution. Even for the "nice" MLE, this can be generally hard but at least a good asymptotic results exist
+In general, the distribution of an arbitrary statistical estimator can become very complicated. Yet, to be able to run statistical tests or construct confidence intervals, we have to know the actual distribution. Even for the "nice" MLE, this can be generally hard but at least good asymptotic results exist
 
 <dir class="theorem">
 (Asymptotic normality of the MLE): Be $X_1, \dots, X_n \sim p_{\theta^*}$ and be $\hat{\theta}$ the MLE of $\theta^*$. Then 
@@ -300,13 +300,13 @@ test
 
 ### Experimental design
 
- By Theorem 8, we can estimate the standard deviation of the MLE by $\sigma_F = \sqrt{(n F_x(\theta^*))^{-1}}$ whenever $n$ is large enough. Observe that the standard deviation decreases whenever the Fisher information or $n$ is large. In practise we cannot control the true value, but we can effect the number of trials we perform i.e. by collecting more data. So it may be interesting to know how much samples we need such that the MLE has a standard deviation below a certain threshold...
+ By Theorem 8, we can estimate the standard deviation of the MLE by $\sigma_F = \sqrt{(n F_x(\theta^*))^{-1}}$ whenever $n$ is large enough. Observe that the standard deviation decreases whenever the Fisher information or $n$ is large. In practice, we cannot control the true value, but we can affect the number of trials we perform i.e. by collecting more data. So it may be interesting to know how many samples we need such that the MLE has a standard deviation below a certain threshold...
 
- Let's again consider an Bernoulli experiment. We want to estimate the probability $\theta^*$ using the MLE $\hat{\theta}$ but want to ensure that the standard deviation $\sigma_F \leq \epsilon$. It follows that we have to ensure that
+ Let's again consider a Bernoulli experiment. We want to estimate the probability $\theta^*$ using the MLE $\hat{\theta}$ but want to ensure that the standard deviation $\sigma_F \leq \epsilon$. It follows that we have to ensure that
 
  $$ \sqrt{(n F_x(\theta^*))^{-1}} \leq \epsilon \iff  n \geq \frac{1}{\epsilon^2}F_x(\theta^*)^{-1}$$
 
- Note that in practise we do not know the ture value $\theta^*$, thus we may solve this problem for the worst case scenario i.e
+ Note that in practice we do not know the true value $\theta^*$, thus we may solve this problem for the worst-case scenario i.e
 
 $$ n \geq \frac{1}{\epsilon^2} \max_\theta F_x(\theta)^{-1} =  \frac{1}{\epsilon^2} F_x(0.5)^{-1} = \frac{1}{(2\epsilon)^2}$$
 
@@ -315,7 +315,7 @@ As a result to achive a standard deviation of $\sigma_F \leq 0.1$ we need $n \ge
 
 ### Testing hypothesis
 
-This also paves the way to approximate the sampling distribution of any MLE of an arbitrary statistical model. Note the sampling distribution of a MLE is the distributions of estimates given independent realizations $X_1, \dots, X_N \sim p_{\theta^*}$. For example for large enough $n$ MLE estimates will fall into the range
+This also paves the way to approximate the sampling distribution of any MLE of an arbitrary statistical model. Note the sampling distribution of an MLE is the distribution of estimates given independent realizations $X_1, \dots, X_N \sim p_{\theta^*}$. For example for large enough $n$ MLE estimates will fall into the range
 $$ \left( \theta^* - 2.96 \sigma_F, \theta^* + 2.96 \right) $$
 with (approximately) a $99%$ chance.
 
@@ -325,7 +325,7 @@ This is visually demonstrated in the figure below. Notice that even for small $n
 <figure>
   <img src="../../../assets/bernoulli_confidence.png" />
   <img src="../../../assets/bernoulli_confidence2.png" />
-  <figcaption> The figures show the sampling distribution of the MLE for different number of datapoints, as well as the constructed $99\%$ confidence intervals. </figcaption>
+  <figcaption> The figures show the sampling distribution of the MLE for a different number of data points, as well as the constructed $99\%$ confidence intervals. </figcaption>
 </figure>
 </p>
 
@@ -336,17 +336,17 @@ $$ H_0: \theta^* = 0.5 \qquad H_1: \theta^* \neq 0.5$$
 and choose an significance level of $\alpha = 0.01$. We know that for $n = 25$ trials, as a result $\sigma_F = 0.1$. Hence $99 \%$ of the time and MLE estimate would fall in between $(0.21, 0.79)$. Hence we would reject the null hypothesis if $\hat{\theta} < 0.21$ or $\hat{\theta} > 0.79$.
 ### Constructing confidence intervals
 
-An alternative way to quantify our confidence in the estimate is to use confidence intervals. Recall that from the frequentist perspective the definition is a bit fuzzy: A $99\%$ confidence interval does not mean that the true value will lay in it with probability $0.99$, but that if we estimate 100 such intervals that 99 of them will contain the true value. We can obtain in similarly as before by just replacing the ture value with our esitimate $\hat{\theta}$. This is visually demonstrated in the plot below.
+An alternative way to quantify our confidence in the estimate is to use confidence intervals. Recall that from the frequentist perspective the definition is a bit fuzzy: A $99\%$ confidence interval does not mean that the true value will lay in it with probability $0.99$, but that if we estimate 100 such intervals that 99 of them will contain the true value. We can again just replace the true value with our estimate $\hat{\theta}$. This is visually demonstrated in the plot below.
 
 ## Fisher information in Bayesian statistics
 
-Until know we mostly discussed about point estimates, so why is it also relevant in the Bayesian case? In the Bayesian paradigm we start with existing prior beliefs about the parameter and update these beliefs based on information provided by data to guide inferential decisions.
+Until now we mostly discussed point estimates, so why is it also relevant in the Bayesian case? In the Bayesian paradigm, we start with existing prior beliefs about the parameter and update these beliefs based on information provided by data to guide inferential decisions.
 
 Our prior beliefs are typically expressed in terms of a *prior* distribution $p(\theta)$, data is assumed to be generated by $p(x \mid \theta)$. Based on probability theory there is only a single way how observing $x$ should update our beliefs about our parameters, namely Baye's theorem
 
 $$ p(\theta \mid x) = \frac{p(x \mid \theta)p(\theta)}{p(x)} $$
 
-An intermediate connection to frequentist approach if now just start do drop to full posterior in fate of using only some point estimates derived of it. For example we can use the posterior mean, variance or mode. But let's try to stay Bayesian! As such we may want to extend definition of the Fisher information matrix. 
+An intermediate connection to frequentist approach if now just start to do drop to full posterior in the fate of using only some point estimates derived of it. For example, we can use the posterior mean, variance, or mode. But let's try to stay Bayesian! As such we may want to extend the definition of the Fisher information matrix. 
 
 <dir class="definition">
 Given a generative model $p(x,\theta) = p(x|\theta)p(\theta)$. We define the Bayesian Fisher information matrix as 
@@ -356,9 +356,9 @@ $$ F = \mathbb{E}_{p(\theta)} \left[ F_x(\theta) \right] + \mathbb{E}_{p(\theta)
 where $ F_x(\theta)$ is the usual Fisher information as defined above. 
 </dir>
 
-Notice that in the Bayesian case, the Fisher information is constant with respect to the parameter but does change with respect to the prior. It is easy to see that as $p(\theta) \rightarrow \delta (\theta_0)$ (i.e. the prior becomes a point mass) also $F \rightarrow F_x(\theta_0)$ i.e. we recover the frequentist Fisher information evaluated at $\theta_0$.
+Notice that in the Bayesian case, the Fisher information is constant for the parameter but does change with respect to the prior. It is easy to see that as $p(\theta) \rightarrow \delta (\theta_0)$ (i.e. the prior becomes a point mass) also $F \rightarrow F_x(\theta_0)$ i.e. we recover the frequentist Fisher information evaluated at $\theta_0$.
 
-The intuitive meaning also changes a bit. Given some $x \sim p(x)$ the BFIM can be seen as the amount of information $x$ carries averaged over any possible parameter, as specified by the prior and plus the information provided by the prior itself.
+The intuitive meaning also changes a bit. Given some $x \sim p(x)$ the BFIM can be seen as the amount of information $x$ carries averaged over any possible parameter, as specified by the prior plus the information provided by the prior itself.
 
 ## Fisher information and the posterior
 

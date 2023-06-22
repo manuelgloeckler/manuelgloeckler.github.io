@@ -20,11 +20,11 @@ This is known as a *local Lipschitz* property. In this post, we will investigate
 
 We consider a totally differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$. The first-order  derivative is thus given by it's Jacobian matrix $J_f(x) \in \mathbb{R}^{n \times m}$. Analogously we define the *local Lipschitz* property as following
 
-<dir class="definition">
+<div class="definition">
  A function $f$ and set $S \subset \mathcal{X}$ is called locally L-Lipschitz for $L \geq 0$ in the (vector) norm $ \mid  \mid  \cdot  \mid  \mid $ if for all $x,y \in S$
 
   $$  \mid  \mid f(x) - f(y) \mid  \mid  \leq L  \mid  \mid x - y \mid  \mid $$
-</dir>
+</div>
 
 Notice that the first-order derivative is now a matrix. Thus we require the notion of a matrix or operator norm. Given two vector norms $ \mid  \mid  \cdot  \mid  \mid_a$ and  $\mid  \mid \cdot \mid  \mid_b$, the operator norm of a linear map represented through a matrix $A$ is given by
 
@@ -36,21 +36,20 @@ $$  \mid  \mid A \mid  \mid _2 = \sqrt{ \lambda_{max}(A^T A)} =  \sigma_{max}(A)
 
 This is great, but let's first try to understand why relating the Lipschitz property with the Jacobian operator norm is not straightforward.  First of all, recall that we required the mean value theorem in the 1d case. So let's first try to generalize this to the multivariate case.
 
-<dir class="lemma">
+<div class="lemma">
 Be $f$ differentiable on an open set $S \subset \mathbb{R}^n$. Consider some $x,y \in S$, let $L_{xy}$ be the line segment connecting them. Then if $L_{xy} \subset S$ there exists an $\xi \in L_{xy}$ such that
 $$ f(x) - f(y) = J_f(\xi)(x-y)$$ 
-</dir>
+</div>
 [proof]
-The line segement is given by $c(t) = tx + (1-t)y$ for $t \in [0,1]$. Consider the one dimensional function $g(t) = f(c(t))$, then by the standard mean value theorem there exists some $\tau$ such that
-$$ g(1) - g(0) = (1-0) g'(\tau) \iff f(x) -f(y) = J_f(c(\tau))(x-y)$$
+The line segement is given by $c(t) = tx + (1-t)y$ for $t \in [0,1]$. Consider the one dimensional function $g(t) = f(c(t))$, then by the standard mean value theorem there exists some $\tau$ such that $$ g(1) - g(0) = (1-0) g'(\tau) \iff f(x) -f(y) = J_f(c(\tau))(x-y)$$
 [/proof]
 
 This is straightforward but very restrictive as it only works on linear lines between points and can only be applied if this line is fully contained in $S$. We can guarantee these constraints by restricting $S$ to be convex. Recall a set is called convex if for all $x,y \in S$ and $\lambda \in [0,1]$ it holds that $\lambda x + (1-\lambda)y \in S$, exactly what we require for the proof to work. We now can state a more general result, which is known as the *multivariate mean value theorem*.
 
-<dir class="lemma">
+<div class="lemma">
 Be $f$ differentiable on an open and convex set $S \subset \mathbb{R}^n$. Then for any $x,y \in S$ we have that
 $$  \mid  \mid f(x) - f(y) \mid  \mid _a \leq  \mid  \mid J_f(\xi) \mid  \mid \cdot  \mid  \mid x-y \mid  \mid _b$$ 
-</dir>
+</div>
 [proof]
 By Lemma 1 we know that for each fixed $x,y \in S$ there is an $\xi \in S$ such that
 $$ f(x) - f(y) = J_f(\xi) (x-y) \iff  \mid  \mid  f(x) - f(y)  \mid  \mid _a =  \mid  \mid  J_f(\xi) (x-y)  \mid  \mid _a$$

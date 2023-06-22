@@ -9,6 +9,10 @@
 *.log
 *.log.*
 
+/_protected
+/_posts/_preliminary_post_ideas
+
+
 /.vscode/
 
 node_modules/

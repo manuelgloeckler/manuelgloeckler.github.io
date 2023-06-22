@@ -7,26 +7,64 @@ articles:
   type: grid
 article_header:
   type: cover
-  image:
-    src: https://s8.gifyu.com/images/ezgif.com-gif-maker-4ba94a3d2fb5426a5.gif
+  <!-- image:
+    src: https://s8.gifyu.com/images/ezgif.com-gif-maker-4ba94a3d2fb5426a5.gif -->
 ---
 
 <div>
   {{ 
   "
-I am currently doing my PhD in Machine Learning under the supervision of Jakob Macke at the University of Tuebingen. I am exited about ML: With the right data and the right analytics, people can choose a solid course of action not based on hunches or guesses but on actual evidence.
+I am currently doing my Ph.D. in Machine Learning (ML) under the supervision of Jakob Macke at the University of Tuebingen. 
+I am excited about ML: With the right data and method, people can choose a solid course of action not based on hunches or guesses but on actual evidence.
 ML can blow through terabytes of experimental data, highlighting anomalies and detecting patterns humans could have never spotted.
 
-We have always learned from oberservation, science is done based on observations. Science has also advanced through simulation. You've may notice the little simulation above. It is not a random stochastic process, it is one that evolves according to the Lotka Volterra model.
+We have always learned from observation; science is done based on observations. But science has also advanced through simulation, which provided *insights* into latent processes which could explain what we observed.
+This is in contrast to *black-box models*  such as neural networks. Sure they can fit the data, but they do typically not provide any *insight* into the underlying process (or we are just too dumb to understand them...).
+You may have noticed the little simulation above. It is not a random stochastic process; it evolves according to the Lotka-Volterra dynamics, also known as predator-prey equations.
+These equations just encode our understanding of a predator-prey interaction: The prey population rises if the predator population is low, and the predators can only grow if there is enough prey to eat.
+While in such *white-box models* the underlying dynamics are typically known,  a few parameters often remain. For example, the rate at which the prey can grow or the rate at which predators can catch the prey.
+These parameters are often data-dependent, i.e., which predator (bird/lion) and prey (insect/zebra) we consider.
 
+Thus to generate *scientific insights* we not only need to understand the underlying dynamics but also have to find the parameters consistent with experimental observations.
+Unfortunatly 'inverting' the simulation to infer the parameters consistent with data is generally hard. A prinicpled way of doing so is *Bayesian inference*, which for most interesting problems is intractable...
+Recently several methods catched momentum that use *black-box models* such as neural networks to perform *Bayesian inference* for us often in an *amortized fashion*.
+This is especially prominent within simulation-based inference or generative modelling.
+While most of the literature currently aim to increase their efficiency or performance, less investigations where done to what problems the 'neural net part' i.e. the inference network causes i.e. for example with regard to *robustness*.
+
+So why should we trust the solution of the neural network, which are knwon to do this:
   " | markdownify}}
-  </div>
+</div>
+
+<img src="https://cdn.vox-cdn.com/thumbor/uXLBjJlvk7QNC_HfXbkThG3sHPs=/0x0:652x316/1200x800/filters:focal(274x106:378x210):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/58191589/adversarial_patch_.0.gif" style="max-width: 100%;"/>
+
+<div style="padding-left: 20px;">
+  {{ 
+  "
+This raises the question how robust are the infered hypothesis by our inference network are. Some question I want to investigate:
+  " | markdownify}}
+</div>
+
+<div style="padding-left: 50px;">
+  {{ 
+  "
+  * Are there adversarial examples (yes!) ? What is an adversarial example in the context of inference ? After all our output is a distribution, not just a some class label. 
+  * Adversarial examples do always introduce model misspecification, as the data is no longer generated soley by our model. How do adversarial examples relate to model-misspecification?
+  * The last point also implies that under adversarial attacks the Bayesian answer is no longer optimal (as the model is wrong). So is the Bayesian answer not robust or is it the neural network ?
+  * How to avoid adversarial examples?
+  * How to interpret adversarial defenses in the context of Bayesian inference ?
+  " | markdownify}}
+</div>
 
 
 <div>
 {{ "# Posts
+
+Here are some recent posts by me. You can also look them at in the Blog section or the archive.
+
 --- " | markdownify}}
 </div>
+
+<div></div>
 
 
 
