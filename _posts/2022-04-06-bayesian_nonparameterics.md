@@ -3,7 +3,7 @@ layout: article
 title: An interactive guide through Bayesian Nonparameterics
 key: A1
 tags: Bayesian ML, Statistics, Math
-cover: https://en.wikipedia.org/wiki/File:Dirichlet_process_draws.svg
+cover: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Dirichlet_process_draws.svg/1200px-Dirichlet_process_draws.svg.png
 comment: true
 ---
 
