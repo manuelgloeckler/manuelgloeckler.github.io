@@ -38,13 +38,13 @@ Let's look at the same figure as above, but the new two dimensional embedding. A
 
 % TODO Add figure
 
-So how we can make our feature mapping more sensitive to general distributions, at best that we can gurantee that $||\mu_X - \mu_Y|| = 0 \iff X = Y$ i.e. the mapping should be injective. Todo so recall that $X = Y$ is satisfied if all *moments* of the distributions are the same! So we can straight forwardly extend our approach by considering the feature mapping
+So how we can make our feature mapping more sensitive to general distributions, at best that we can gurantee that $$||\mu_X - \mu_Y|| = 0 \iff X = Y$$ i.e. the mapping should be injective. Todo so recall that $$X = Y$$ is satisfied if all *moments* of the distributions are the same! So we can straight forwardly extend our approach by considering the feature mapping
 
 $$ \phi_n(X) = \begin{pmatrix} X \\ X^2\\ \vdots \\ X^n \end{pmatrix} \quad \text{ and } \quad \mu_X = \mathbb{E}[\phi_n(X)] $$
 
-As we increase $n\rightarrow \infty$ this should work, right? Well ... no, there are a few problems we have to care about:
+As we increase $$n\rightarrow \infty$$ this should work, right? Well ... no, there are a few problems we have to care about:
 * Not any random variable has an infinite number of finite moments i.e. the StudentT distributions only has finite moments up to the number of degrees of freedom.
-* This is only injective if $n = \infty$ ... .
+* This is only injective if $$n = \infty$$ ... .
 
 Alright, let's first get rid of the first problem. Recall that another way to uniquely characterize a distribution is it *cumulative distribution function* (CDF). In contrast to all the moments, this always exists! Be $x_1, \dots, x_n \in \mathbb{R}^d$ with $x_1 \neq x_n$ and consider the feature mapping 
 
@@ -56,10 +56,11 @@ This shouldn't surprise you at all as distributions in general are infinite dime
 
 ## Kernel trick - Reproducing Kernel Hilber Spaces (RKHS)
 
-
+TODO
 
 ## Kernel methods for distributions
 
+TODO
 
 
 
