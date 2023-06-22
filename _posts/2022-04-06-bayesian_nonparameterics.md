@@ -3,7 +3,7 @@ layout: article
 title: An interactive guide through Bayesian Nonparameterics
 key: A1
 tags: Bayesian ML, Statistics, Math
-cover: https://s8.gifyu.com/images/cover_bnp9c3d89a85f1d0055.gif
+cover: https://en.wikipedia.org/wiki/File:Dirichlet_process_draws.svg
 comment: true
 ---
 
