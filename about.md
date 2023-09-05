@@ -31,7 +31,6 @@ I am a PhD student at the University Tübingen and part of the International Max
 
 In my PhD I work on adversarial robustness and calibrated uncertainty in amortized Bayesian inference. Most of current literature focus on classification. Yet as large scale inference algorithms become more popular in scienctific or medical domains, this topic becomes increasingly relevant.
 
-
 I am generally very interested in the field of probabilistc machine learning but also learning theory in general. If you want to know more about my interests or optinions you can checkout my posts (which essentially are topics I found sufficiently interesting to dive into it and writing an article (and found time to do so (: )).
 # CV
 
