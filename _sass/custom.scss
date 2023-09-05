@@ -1,6 +1,6 @@
 
 body {
-    counter-reset: theorem lemma, figures;
+    counter-reset: theorem lemma figures;
 }
 
 figure {
@@ -11,12 +11,12 @@ figure {
     border: thin solid gainsboro;
     background: white;
     width: 100%;
+    counter-reset: figures;
 }
   
 figcaption {
     padding: .8em;
     text-align: left;
-    counter-reset: figures;
     font-style: italic;
 }
 figcaption:before {
