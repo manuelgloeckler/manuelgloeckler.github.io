@@ -51,7 +51,7 @@ This list may not be up to date. For a more up to date version please refer to m
 * **Master of Science in Bioinformatics**\
   Okt 2019 - Mar 2022\
   University Tübingen (Grade: 1.15, 3.9 GPA equivalent)\
-  Thesis: ["Variational methods for simulation-based inference"](assests/FINAL_thesis_version.pdf)
+  Thesis: ["Variational methods for simulation-based inference"](assets/FINAL_thesis_version.pdf)
 
 * **Bachelor of Science in Bioinformatics**\
   Okt 2016 - Sep 2019\
