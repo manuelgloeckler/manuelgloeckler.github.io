@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Information geometry and it's application in Machine Learning
+title: Information geometry
 key: A5
 tags: Math
 cover: https://www.researchgate.net/publication/351854812/figure/fig1/AS:1132455809564700@1647009913987/Representation-of-a-2D-statistical-manifold-with-its-tangent-space-at-a-point-th-and-two_Q640.jpg
@@ -42,7 +42,7 @@ A **manifold** tries to combine the best of both worlds, the generality of topol
 
 In other words the surface of a circle or a sphere is a one/two dimensional manifold in $\mathbb{R}^2$ and $\mathbb{R}^3$.Let's make this a bit more formal.
 
-## A bit more formal
+## Manifolds
 
 ### Basic notation and definitions
 <dir class="definition">
@@ -106,39 +106,68 @@ Especially we require *smooth parameteric curves* $\gamma(t): [a,b] \rightarrow 
 
 $$ y: [a,b] \rightarrow \mathbb{R}^d \text{ with } y(t) = \varphi(\gamma(t)).$$
 
-This function is just a "normal" function within in euclides space. Thus to get a *tangent vector*, we just can differentiate it with respect to $t$. Let's assume that our curve goes through our point of interest $x$, then there is an $t_0$ such that $\gamma(t_0) = x$. We obtain
+This function is just a "normal" function within in euclidean space. Thus to get a *tangent vector*, we just can differentiate it with respect to $t$. Let's assume that our curve goes through our point of interest $x$, then there is an $t_0$ such that $\gamma(t_0) = x$. We obtain
 
 $$ v_\gamma := \frac{dy}{dt}(t_0)  = \left( \frac{dy_1}{dt}(t_0), \dots, \frac{dy_d}{dt}(t_0) \right)$$
 
 So, we just generalized the notion of 'directional derivaitves' to manifolds. Instead of considering vectors pointing in a certain direction, we consider curves that go throught $x$. As a result we can define the $T_x\mathcal{M}$ as the space spanned by all $v_{\gamma}$ for all curves $\gamma$ that go through $x$.
 
-So let's try to compute tangent vectors on our circle. For this we need a parametric curve, which we can get by using polar coordinates i.e.
+Let's try to compute tangent vectors on our circle. For this we need a parametric curve, which we can get by using polar coordinates i.e.
 
 $$\gamma: [a,b] \rightarrow \mathbb{S}: \ \gamma(t) = (\cos(t), \sin(t)) $$
 
-We thus obtai that the coordinates of this curve vary by
+We thus obtain that the coordinates of this curve vary by
 
 $$ y(t) = \varphi_{right}(\gamma(t)) = \sin(t) \qquad \frac{dy}{dt}(t_0) = \cos(t_0) $$
 
-where $\gamma(t_0) = x$, thus $t_0 = arc\cos\left(\frac{x_0}{\sqrt{x_0^2 + x_1^2}}\right)$. All what is left is to map back to the manifold for which we can use the invese chart. We get the tangent space 
+where $\gamma(t_0) = x$, thus $t_0 = arc\cos\left(\frac{x_0}{\sqrt{x_0^2 + x_1^2}}\right)$. All what is left is to map back to the manifold for which we can use the inverse chart. We obtain
 
-Thus for any point on the right arc of the circle, the tangent space is given by
+$$ v_\gamma = \frac{dy}{dt}(t_0) = \cos(t_0) = \frac{x_0}{\sqrt{x_0^2 + x_1^2}}$$
+
+Thus we can conclude that the tangent space of the circle at $x$ is given by
 
 $$ T_x \mathbb{S} = \left\{ x + \frac{x_0}{\sqrt{x_0^2 + x_1^2}} t \mid t \in \mathbb{R} \right\} $$
 
-
-While fairly intuitive this definition is not very usefull as there are many curves that can pass through $x$. Before we could simplify it by instead considering an orthogonal basis, which unfortunatly undefined for curves. So let's try to find the basis of this space.
-
-TODO
+as the manifold is one dimensional, the tangent space is one dimensional as well and we don't need to consider the other curves!
 
 
 ### Riemannian manifolds
 
-After all that we can still not do much. Especially 
 
+A Riemannian manifold is equipped with a metric tensor, which assigns an inner product to each pair of tangent vectors at each point on the manifold. This inner product defines a notion of length and angle, allowing us to measure distances and angles intrinsically on the manifold.
 
+#### The Riemannian Metric
 
-## A notion of distance 
+The key ingredient that defines a Riemannian manifold is the Riemannian metric. A Riemannian metric on a smooth manifold $M$ is a smoothly varying family of inner products on the tangent spaces of $M$. Mathematically, it is a symmetric, positive-definite tensor field, usually denoted as $g$. The metric tensor $g$ assigns an inner product $\langle v, w \rangle$ to each pair of tangent vectors $v$ and $w$ at each point on the manifold.
+
+<dir class="definition">
+A Riemannian Metric on a smooth manifold $\mathcal{M}$ is defined as follows:
+
+For each point $x$ in the manifold $\mathcal{M}$, there exists an open neighborhood $U$ and a smooth function $g_x: U \rightarrow \mathbb{R}^{n\times n}$ such that:
+
+<ul>
+<li> The function $g_x$ assigns a symmetric positive-definite matrix to each point $p$ in the neighborhood $U$, i.e., $g_x(p)$ is a symmetric positive-definite matrix for all $p \in U$. </li>
+<li> The collection of such functions $\{ g_x : U \rightarrow \mathbb{R}^{n\times n} \}$ is smoothly varying, meaning that for any two overlapping neighborhoods $U_1$ and $U_2$ in $\mathcal{M}$, the corresponding metric tensors $g_{x_1}$ and $g_{x_2}$ defined on these neighborhoods must smoothly transition between each other, ensuring compatibility. </li>
+</ul>
+</dir>
+
+The metric tensor allows us to define the length of curves on the manifold. Given a curve $\gamma: [a, b] \rightarrow M$, the length of the curve between points $\gamma(a)$ and $\gamma(b)$ is given by the Riemannian length:
+
+$$
+L(\gamma) = \int_{a}^{b} \sqrt{\langle \dot{\gamma}(t), \dot{\gamma}(t) \rangle} dt
+$$
+
+where $\dot{\gamma}(t)$ is the tangent vector to the curve at each point.
+
+#### Geodesics
+
+Geodesics are curves on a Riemannian manifold that locally minimize distance. They are analogous to straight lines in Euclidean space. Formally, a geodesic is defined as a curve $\gamma(t)$ such that the tangent vector $\dot{\gamma}(t)$ is parallel transported along the curve. In other words, $\nabla_{\dot{\gamma}} \dot{\gamma} = 0$, where $\nabla$ denotes the Levi-Civita connection associated with the Riemannian metric.
+
+#### Curvature
+
+The curvature of a Riemannian manifold measures how much the geometry of the manifold deviates from that of Euclidean space. It is encoded in the Riemann curvature tensor, which quantifies how the infinitesimal area spanned by two vectors changes as one moves around a small loop on the manifold.
+
+## Statistical Manifolds
 
 A main concern of theory of inference is the problem of updating probabilities when new information arises. Typically we pick the "best fitting" model out of a family of distributions and this arises many questions:
 
@@ -147,12 +176,16 @@ A main concern of theory of inference is the problem of updating probabilities w
 * Can we quantify the difference?
 * What is the shortest path from one distribution ot another?
 
-This are inherently **geometic** questions and thus fall into the domain of **information geometry**. More specifiall we will discuss here the notion of "distance" between probability distributions as well as the induced statistical manifolds.
+This are inherently **geometic** questions and thus fall into the domain of **information geometry**. More specifically, in previous chapter we exactly learned how to answer this questions for Manifolds. Thus by interpreting a parametric family of distributions as a manifold we can use the tools of differential geometry to answer this questions. This is the main idea of information geometry.
 
 
+A **statistical manifold** is a smooth manifold, denoted as $\mathcal{M}$, whose points represent probability distributions. Each point on the manifold corresponds to a particular probability distribution, such as a Gaussian distribution, a Poisson distribution, or any other type of distribution.
 
 
-References
+# TODO Add example and 
+
+## References
+
 * https://math.stackexchange.com/questions/708634/is-an-infinite-line-the-same-thing-as-an-infinite-circle
 * https://en.wikipedia.org/wiki/Topological_space
 * https://bjlkeng.github.io/posts/manifolds/
@@ -162,10 +195,4 @@ References
 
 
 
-
-
-
-
-
-## References
 

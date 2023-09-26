@@ -27,30 +27,35 @@ key: page-about
 ---
 
 
-I am a PhD student at the University Tübingen and part of the International Max-Planck Research School for Intelligent Systems (IMPRS-IS). I am supervised by Prof. Dr. Jakob Macke.
+I am a PhD student at the University of Tübingen and part of the International Max-Planck Research School for Intelligent Systems (IMPRS-IS). My supervisor is Prof Dr Jakob Macke.
 
-In my PhD I work on adversarial robustness and calibrated uncertainty in amortized Bayesian inference. Most of current literature focus on classification. Yet as large scale inference algorithms become more popular in scienctific or medical domains, this topic becomes increasingly relevant.
+I am developing machine learning tools to perform Bayesian inference for simulation-based models. I am interested in the intersection of machine learning, statistics and science applications. Some of my main interests are:
 
-I am generally very interested in the field of probabilistc machine learning but also learning theory in general. If you want to know more about my interests or optinions you can checkout my posts (which essentially are topics I found sufficiently interesting to dive into it and writing an article (and found time to do so (: )).
-# CV
+- Bayesian inference
+- Neural density estimation and generative models
+- Robustness
+- Probabilistic programming
+- Uncertainty quantification/calibration
 
-## Education
+## CV
 
-* **PHD student at the International Max-Planck Research School for Intelligent Systems** [IMPRS-IS](https://imprs.is.mpg.de/)\
+This list may not be up to date. For a more up to date version please refer to my [CV](/assets/cv.pdf).
+
+### Education
+
+* **PHD student at the International Max-Planck Research School for Intelligent Systems** [(IMPRS-IS)](https://imprs.is.mpg.de/)\
   Apr 2022 - Now\
   Supervised by Prof. Dr. Jakob Macke, University Tübingen.
 
 * **Master of Science in Bioinformatics**\
   Okt 2019 - Mar 2022\
   University Tübingen (Grade: 1.15, 3.9 GPA equivalent)\
-  Thesis: ["Variational methods for simulation-based inference"](assests/FINAL_thesis_version.pdf)\
-  TODO TRANSCRIPT AND CERTIFICATES
+  Thesis: ["Variational methods for simulation-based inference"](assests/FINAL_thesis_version.pdf)
 
 * **Bachelor of Science in Bioinformatics**\
   Okt 2016 - Sep 2019\
-  University Tübingen (Grade: 1.31, 3.7 GPA equivalent)\
-  Thesis:  ["The landscapes of CD8+ T cell immunogenicity from a self-tolerance based perspective in sequence space"](assets/bachelor_thesis.pdf)\
-  TODO TRANSCRIPT AND CERTIFICATES
+  University Tübingen (Grade: 1.31, 3.7 GPA equivalent)
+  Thesis:  ["The landscapes of CD8+ T cell immunogenicity from a self-tolerance based perspective in sequence space"](assets/bachelor_thesis.pdf)
 
 * **A-Levels**\
   Joachim-Hahn-Gymnasium, Blaubeuren, Germany (Grade: 2.1, 3.0 GPA equivalent)
@@ -58,23 +63,29 @@ I am generally very interested in the field of probabilistc machine learning but
 ## Work experience
 
 * **Research assistant**\
-  University Tübingen, COmputational Systems Biology, Junior Prof. Dr. Andreas Dräger\
+  Seq 2020 - Feb 2022\
+  University Tübingen, Computational Systems Biology, Junior Prof. Dr. Andreas Dräger\
   Supervised by Dr. Reihaneh Mostolizadeh.
 
 * **Student assistant**\
+  Okt 2018 - Feb 2019\
   University Tübingen, Theory of Machine Learning Group, Prof. Dr. Ulrike von Luxburg.\
   Teaching assistant for lecture "Algorithms".
 
 ## Selected Publications
 
+For a full list of publications please refer to [google scholar](https://scholar.google.com/citations?user=0Vdv0H0AAAAJ&hl=de).
+
+
 * **Variational methods for simulation-based inference**, ICLR 2022\
   Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2203.04176)
 
+* **Adversarial robustness of amortized Bayesian inference**, ICML 2023\
+  Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2305.14984)
 
-Here is my current [CV](/assets/cv.pdf) as PDF.
 
-# Some notes
+Here is a [CV](/assets/cv.pdf) as PDF (probably outdated).
+
+## Some notes
 
 If I read into interesting topics I typically as default write a small article about it together with a way simplified example (if it is a method). This is mostly what I will post here. I try to explain it from scratch and try to include (simple) proof (ideas) for any claims I raise, but I assume from the reader some basic knowledge about math and statistics.
-
-PS: The search bar is broken for whatever reason.
