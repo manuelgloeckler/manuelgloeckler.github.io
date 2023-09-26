@@ -20,7 +20,7 @@ text_skin: ocean # "default" (default), "dark", "forest", "ocean", "chocolate", 
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
 url     : # the base hostname & protocol for your site e.g. https://www.someone.com
 baseurl : # does not include hostname
-title   : Machine Learning and Science
+title   : manuelgloeckler
 description: > # this means to ignore newlines until "Language & timezone"
   My website about thinks I care about ranging from topics in machine learning to topics in certain natural sciences.
 
@@ -35,7 +35,7 @@ timezone: # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for
 ##############################
 author:
   type      : person # "person" (default), "organization"
-  name      : Manuel Glöckler
+  name      : Manuel Gloeckler
   url       :
   avatar    : ./_data/avatar.svg # path or url of avatar image (square)
   bio       : TODO
