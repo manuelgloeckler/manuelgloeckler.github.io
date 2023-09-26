@@ -47,6 +47,7 @@ This list may not be up to date. For a more up to date version please refer to m
   Apr 2022 - Now\
   Supervised by Prof. Dr. Jakob Macke, University Tübingen.
 
+
 * **Master of Science in Bioinformatics**\
   Okt 2019 - Mar 2022\
   University Tübingen (Grade: 1.15, 3.9 GPA equivalent)\
@@ -71,6 +72,11 @@ This list may not be up to date. For a more up to date version please refer to m
   Okt 2018 - Feb 2019\
   University Tübingen, Theory of Machine Learning Group, Prof. Dr. Ulrike von Luxburg.\
   Teaching assistant for lecture "Algorithms".
+
+## Summer schools
+
+*  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assests/ellis_summer_school.pdf) 
+*  Machine Learning Summer School 2021 [[certificate]](assests/mlls_summer_school.pdf)
 
 ## Selected Publications
 
