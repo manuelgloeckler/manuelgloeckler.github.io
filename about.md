@@ -75,8 +75,8 @@ This list may not be up to date. For a more up to date version please refer to m
 
 ## Summer schools
 
-*  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assests/ellis_summer_school.pdf) 
-*  Machine Learning Summer School 2021 [[certificate]](assests/mlls_summer_school.pdf)
+*  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assets/ellis_summer_school.pdf) 
+*  Machine Learning Summer School 2021 [[certificate]](assets/mlls_summer_school.pdf)
 
 ## Selected Publications
 
