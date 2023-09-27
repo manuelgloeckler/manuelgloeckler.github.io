@@ -3,7 +3,9 @@ layout: article
 title: "Bayesian Nonparametrics: An interactive guide"
 key: A1
 tags: Bayesian ML, Statistics, Math
-cover: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Dirichlet_process_draws.svg/1200px-Dirichlet_process_draws.svg.png
+aside:
+    toc: true
+cover: assets/cover_bnp.gif
 comment: true
 ---
 
@@ -12,9 +14,9 @@ Traditional parametric models, characterized by a fixed and finite number of par
 The Bayesian nonparametric (BNP) approach presents an alternative to parametric modeling and selection. It adapts its complexity according to the available data quantity or the complexity of the data generation process. This inherent flexibility helps mitigate underfitting, while the Bayesian methodology for computing complete posteriors addresses the issue of overfitting. It's worth noting that we refer to a model as parametric when it possesses a finite number of parameters, whereas a nonparametric model assumes, a priori, an infinite number of parameters.
 
 In the context of Bayesian nonparametric models, a BNP model defines a probability distribution across an infinite-dimensional parameter space. While this might initially seem intricate, in practice, a BNP model employs only a finite subset of the potentially infinite parameters to explain any finite set of observations.
-## A parametric model: Mixture models
+## Mixture models
 
-
+### Finite mixture models
 Let's start with a straightforward parametric model frequently employed for clustering or density estimation purposes: The Gaussian Mixture model.
 
 We can express the generative model for $K$ clusters as follows:
@@ -26,7 +28,7 @@ $$ \pi \sim Dir(\alpha)$$
 
 $$ z_n \sim Cat(\pi)$$
 
-$$ x_n \sim \mathcal{\mu_{z_n},\Sigma}$$
+$$ x_n \sim \mathcal{N}(\mu_{z_n},\Sigma)$$
 
 Here, $\mu_k$ represents the cluster means, with one for each of the $K$ clusters. Conversely, $z_n$ signifies the cluster memberships, and $\pi$ denotes the mixing coefficients.
 
@@ -55,7 +57,7 @@ Let's say we have $K=1000$ components. How many points do we need to observe all
 
 Letting $K \rightarrow \infty$ now seems less unreasonable, doesn't it? After all, we will ultimately observe a finite number of observations, leading to only a finite number of components! Keep in mind that the simulation above employs $K = 1000," so the line will eventually flatten as we approach 1000 (though you might need to wait forever for that :D). In the next section, we will delve into how we can set $K = \infty$."
 
-## The Stickbreaking construction
+### The Stickbreaking construction
 
 The primary challenge we encounter when letting $K \rightarrow \infty$ is the potential for the Dirichlet distribution to become ill-defined. After all, how can we sample a vector of infinite length? At a certain point at least your memory will say goodbye!
 
@@ -85,7 +87,7 @@ As it turns out, this concept is (almost) accurate; we can, in fact, generalize 
 * Draw $\phi_i \sim \mathcal{B}(a_i,b_i)$. Set $\pi_i =  \prod_{j=1}^{K-1}(1-\phi_j) \phi_i$
 * ...
 
-In this manner, we generate an infinite sequence $\pi_1, \pi_2, \cdots," from which we can, at least, ensure that $\sum_{k=1}^\infty \pi_k \leq 1." But, hold on, why doesn't it equal one?
+In this manner, we generate an infinite sequence $\pi_1, \pi_2, \dots$, from which we can, at least, ensure that $\sum_{k=1}^\infty \pi_k \leq 1$. But, hold on, why doesn't it equal one?
 
 This discrepancy becomes apparent through a counterexample. Consider the sequence $\pi_i = 1/(2^n+2)$. In this case, $\sum_{i=1}^\infty \pi_i = 1/2 \leq 1$. Hence, we need to ensure that we cannot sample such sequences, or at the very least, that the probability of sampling them is zero (the set of such sequences should have negligible measure). Interestingly, it is possible to achieve this by constraining the set of parameters $a_i, b_i$ within the process (as outlined in Ishwaran and James, 2001). In practice, convergence to a finite sum typically occurs quite swiftly, and the process is often truncated after a certain point. Regardless, at some stage, floating-point precision may pose an issue. You can explore this for yourself here:
 
@@ -95,7 +97,7 @@ It appears that if we select $a_1=1$ and $\beta = \alpha > 0$, then with a proba
 
 {% include rate_of_clusters_infinite_DP.html %}
 
-## Dirichlet process mixture models
+### Infinite mixture models
 
 After discovering the GEM distribution, we can now easily write up a generative model for a mixture model with an infinite number of components.
 
@@ -111,7 +113,7 @@ Now, let's examine some samples from this process. It's important to note that w
 
 {% include dp_mixture.html %}
 
-## Dirichlet process: A bit more formal
+## Dirichlet process: Formal definition
 
 Let $\Theta$ represent a parameter space, and let $G_0$ be a base measure defined over $\Theta$. Once again, we draw $\pi \sim GEM(\alpha)$ and $\theta_k \sim G_0$. Consequently, we refer to $G = \sum_{k=1}^\infty \pi_k \delta_{\theta_k}$ as a draw from a Dirichlet process (DP), denoted as $G \sim DP(\alpha, G_0)$. Here, $\delta_{\theta_k}$ signifies an indicator function applied to a specific $\theta_k$ sampled from the base measure. Thus, every draw from a DP embodies this infinite object. We can regain the previous scenario by simply setting $\Theta = \mathbb{R}^2$ and $G_0 = \mathcal{N}(\mu_0, \Sigma_0)$. In this context, all the $\theta_k$ now correspond to an infinite number of potential cluster centers, each associated with a specific mixing coefficient $\pi_k$.
 
@@ -141,7 +143,7 @@ $$ x_n \sim \mathcal{N}(\mu_k, \Sigma)$$
 
 Note that we no longer require to use the latent variables $z_n$ i.e. the cluster memberships.
 
-## The Dirichlet process posterior
+### The Dirichlet process posterior
 
 Consider $G \sim DP(\alpha, G_0)$. As $G$ represents a random distribution itself, we can draw samples $\theta_1, \dots, \theta_n \sim G$. It's essential to note that the $\theta_i's$ assume values within the set $\Theta$ since $G$ is a distribution over $\Theta$. Now, let's assume our interest lies in the posterior distribution of $G$ after observing $\theta_1, \dots, \theta_n$.
 
@@ -164,9 +166,9 @@ Hence, the posterior emerges as a composite distribution, blending the base dist
 
 {% include dp_mixture_posterior.html %}
 
-Note: We draw the means from the GP and within the above Dirichlet Mixture simulation we do condition the means $\mu$, not the observation $x$. We will come to the second case latter.
+Note: We draw the means from the DP and within the above simulation we do condition the means $\mu_k$, not the observation $x$. We will come to the second case latter.
 
-## The predictive distribution and the Chinese restaurant process
+### The predictive distribution and the Chinese restaurant process
 
 Let's revisit the scenario where $G$ follows a Dirichlet Process, denoted as $G \sim DP(\alpha, G_0)$, and we draw an independent and identically distributed (i.i.d.) sequence $\theta_1, \theta_2, \dots \sim G$. Now, consider the predictive distribution for $\theta_{n+1}$, conditioned on $\theta_1, \dots, \theta_n$, with $G$ integrated out.
 
@@ -189,7 +191,7 @@ It's worth noting that the earlier-described simulation faithfully adheres to th
 
 In this section, we will delve into practical and useful applications.
 
-### Dirichlet Process Mixture posterior
+### Infinite mixture models
 
 
 
@@ -238,7 +240,7 @@ Which leads to the maximum likelihood estimator. Yet, different $\mathbb{P}_n^{(
 
 Yet to sample from this distribution we require a number of independent datasets of size $N$ i.e.
 $$\mathbb{P}_n^{(1)}, \dots, \mathbb{P}_N^{(m)}$$
- , which is even harder than before. In frequentist statistics there is a simple but efficient approximation, known as *bootstrap* estimates. There we typically start with a single dataset $$\mathbb{P}_N$$. Then just subsample it $m$ time i.e.  $$\mathbb{P}_N^{(j)} = \frac{1}{n}\sum_{i=1}^n \delta_{x_i}$$ for $$x_i \sim $$\mathbb{P}_N$$. It is easy to see that this is a good approximation only if $N >> n$. So let's try to be a bit more Bayesian.
+ , which is even harder than before. In frequentist statistics there is a simple but efficient approximation, known as *bootstrap* estimates. There we typically start with a single dataset $$\mathbb{P}_N$$. Then just subsample it $m$ time i.e.  $$\mathbb{P}_N^{(j)} = \frac{1}{n}\sum_{i=1}^n \delta_{x_i}$$ for $$x_i \sim \mathbb{P}_N$$. It is easy to see that this is a good approximation only if $N >> n$. So let's try to be a bit more Bayesian.
 
 We just learned that we can efficiently compute posterior on a distribution over distributions! Thus if we don't know $P^\star$, but have some observations $x_1, \dots, x_N \sim \mathbb{P}^\star$, then why shouldn't we just infer the posterior over $\mathbb{P}^\star$. If we choose an Dirchlet process prior on it, then as we saw the posterior is closed from and computationally efficient. As a result we then can sample from a "bootstrap posterior" over $\theta$ by just sampling $\mathbb{P}^{(j)} \sim \mathbb{P}\mid x_1, \dots, x_N$. Instead of an empirical estimate we now can estimate $\theta^\star_{(j)}$ exactly given $\mathbb{P}^{(j)}$.
 
