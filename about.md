@@ -75,11 +75,6 @@ This list may not be up to date. For a more up to date version please refer to m
   University Tübingen, Theory of Machine Learning Group, Prof. Dr. Ulrike von Luxburg.\
   Teaching assistant for lecture "Algorithms".
 
-## Summer schools
-
-*  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assets/ellis_summer_school.pdf) 
-*  Machine Learning Summer School 2021 [[certificate]](assets/mlls_summer_school.pdf)
-
 ## Selected Publications
 
 For a full list of publications please refer to [google scholar](https://scholar.google.com/citations?user=0Vdv0H0AAAAJ&hl=de).
@@ -90,6 +85,12 @@ For a full list of publications please refer to [google scholar](https://scholar
 
 * **Adversarial robustness of amortized Bayesian inference**, ICML 2023\
   Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2305.14984)
+
+## Other
+
+*  IOP trusted reviewer [[certificate]](assets/iop_trusted_reviewer.pdf)
+*  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assets/ellis_summer_school.pdf) 
+*  Machine Learning Summer School 2021 [[certificate]](assets/mlls_summer_school.pdf)
 
 
 Here is a [CV](/assets/cv.pdf) as PDF (probably outdated).

@@ -1,60 +1,64 @@
 ---
 layout: article
-title: Local variation of functions
-tags: Math
+title: Local Variations in Functions
+tags: Mathematics
 aside:
     toc: true
 cover: https://upload.wikimedia.org/wikipedia/commons/5/58/Lipschitz_Visualisierung.gif
 comment: true
 ---
 
-## Operator norms
-### Univariate case
+In this article, we delve into the intricacies of local variations in functions. We extend the concept of Lipschitz functions from univariate to multivariate functions and establish a connection with the operator norm of the Jacobian matrix. Additionally, we explore how different norms can yield diverse interpretations of Lipschitzness, offering versatile tools for analyzing function variations.
 
-In the one-dimensional case, i.e., $f: \mathbb{R} \rightarrow \mathbb{R}$, the local variation of a function is given by its derivative, i.e., the instantaneous rate of change. If the absolute slope is bounded by $L$ within a set $S \subset \mathcal{X}$, then we know that $ \mid f(x) - f(y) \mid \leq L \cdot \mid x-y \mid$ for all $x, y \in B_\epsilon(x)$. To see the reverse direction, consider some $x \in S$, then
+## Ensuring Worst-Case Guarantees
+### Univariate Case
 
-$$ \mid f(x) - f(x + h) \mid \leq L*h \iff \frac{\mid f(x) - f(x+ h) \mid}{h} \leq L \iff \lim_{h\rightarrow 0} \frac{\mid f(x) - f(x+ h) \mid}{h} \leq L  \iff \mid f'(x) \mid \leq L $$
+In the one-dimensional realm, where we have a function $f: \mathcal{X} \rightarrow \mathcal{X}$, the local variation of a function is quantified by its derivative i.e. it's instantaneous rate of change. If the absolute slope is bounded by $L$ within a set $S \subset \mathcal{X}$, it follows that $ \mid f(x) - f(y) \mid \leq L \cdot \mid x-y ~\mid$ for all $x, y \in S$. 
 
-Conversely if $ \mid f'(x) \mid \leq L$ and be $x, y \in S$ then by the mean value theorem, there exists some $\xi \in (x, y)$ such that
+To demonstrate the reverse direction, consider an $x, y \in S$ assuming without restriction of generality that $y = x + h$. It is easy to see that 
 
-$$ \mid f'(\xi) \mid = \frac{\mid f(x)-f(y) \mid}{\mid x-y \mid} \iff \mid f(x)-f(y) \mid = \mid f'(\xi) \mid \mid x-y \mid \iff \mid f(x)-f(y) \mid \leq L \mid x-y \mid $$
+$$ \mid f(x) - f(x + h) \mid \leq L \cdot h \iff \frac{\mid f(x) - f(x+ h) \mid}{h} \leq L \iff \lim_{h\rightarrow 0} \frac{\mid f(x) - f(x+ h) \mid}{h} \leq L  \iff \mid f'(x) \mid \leq L $$
 
-This is known as a *local Lipschitz* property. In this post, we will investigate this property in the case of a multivariate function. Further, we relate alternative approaches to quantifying the local variation of a function.
+Conversely, if $ \mid f'(x) \mid \leq L$ and $x, y \in S$, then by the mean value theorem, there exists $\xi \in (x, y)$ such that
 
-### Multivariate case
+$$ \mid f'(\xi) \mid = \frac{\mid f(x)-f(y) \mid}{\mid x-y \mid} \iff \mid f(x)-f(y) \mid = \mid f'(\xi) \mid \cdot \mid x-y \mid \iff \mid f(x)-f(y) \mid \leq L \cdot \mid x-y \mid $$
 
-We consider a totally differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$. The first-order derivative is thus given by its Jacobian matrix $J_f(x) \in \mathbb{R}^{n \times m}$. Analogously, we define the *local Lipschitz* property as following
+This is known as a *local Lipschitz* property. In this article, we investigate this property in the context of multivariate functions and explore alternative methods for quantifying local function variations.
+
+### Multivariate Case
+
+We consider a completely differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$. The first-order derivative is represented by the Jacobian matrix $J_f(x) \in \mathbb{R}^{n \times m}$. Analogously, we define the *local Lipschitz* property as follows:
 
 <div class="definition">
- A function $f$ and set $S \subset \mathcal{X}$ is called locally L-Lipschitz for $L \geq 0$ in the (vector) norm $ \mid  \mid  \cdot  \mid  \mid $ if for all $x, y \in S$
+A function $f$ and a set $S \subset \mathcal{X}$ are termed locally L-Lipschitz for $L \geq 0$ in the (vector) norm $ \mid  \mid  \cdot  \mid  \mid $ if for all $x, y \in S$,
 
   $$  \mid  \mid f(x) - f(y) \mid  \mid  \leq L  \mid  \mid x - y \mid  \mid $$
 </div>
 
-Notice that the first-order derivative is now a matrix. Thus we require the notion of a matrix or operator norm. Given two vector norms $ \mid  \mid  \cdot  \mid  \mid_a$ and  $\mid  \mid \cdot \mid  \mid_b$, the operator norm of a linear map represented through a matrix $A$ is given by
+Notably, the first-order derivative is now a matrix, necessitating the concept of a matrix or operator norm. Given two vector norms $ \mid  \mid  \cdot  \mid  \mid_a$ and  $\mid  \mid \cdot \mid  \mid_b$, the induced operator norm of a linear map represented by a matrix $A$ is defined as
 
 $$  \mid  \mid  A  \mid  \mid = \sup_{ \mid  \mid  x  \mid  \mid _a = 1}  \mid  \mid  Ax \mid  \mid _b$$
 
-The spectral norm for example is induced by the Euclidean vector norms and can be shown to be
+For example, the spectral norm is induced by Euclidean vector norms and can be computed as
 
 $$  \mid  \mid A \mid  \mid _2 = \sqrt{ \lambda_{max}(A^T A)} =  \sigma_{max}(A) $$
 
-, where $\sigma_{max}$ denotes the largest singular value of $A$.
+where $\sigma_{max}$ denotes the largest singular value of $A$.
 
-This is great, but let's first try to understand why relating the Lipschitz property with the Jacobian operator norm is not straightforward.  First of all, recall that we required the mean value theorem in the 1d case. So let's first try to generalize this to the multivariate case.
+However, relating the Lipschitz property with the Jacobian operator norm is not straightforward. We require a generalization of the mean value theorem to the multivariate case.
 
 <div class="lemma">
-Be $f$ differentiable on an open set $S \subset \mathbb{R}^n$. Consider some $x, y \in S$, let $L_{xy}$ be the line segment connecting them. Then if $L_{xy} \subset S$ there exists an $\xi \in L_{xy}$ such that
+For a differentiable function $f$ on an open set $S \subset \mathbb{R}^n$, consider $x, y \in S$, and let $L_{xy}$ be the line segment connecting them. If $L_{xy}$ lies entirely within $S$, then there exists an $\xi \in L_{xy}$ such that
 $$ f(x) - f(y) = J_f(\xi)(x-y)$$ 
 </div>
 [proof]
 The line segment is given by $c(t) = tx + (1-t)y$ for $t \in [0,1]$. Consider the one-dimensional function $g(t) = f(c(t))$, then by the standard mean value theorem there exists some $\tau$ such that $$ g(1) - g(0) = (1-0) g'(\tau) \iff f(x) -f(y) = J_f(c(\tau))(x-y)$$
 [/proof]
 
-This is straightforward but very restrictive as it only works on linear lines between points and can only be applied if this line is fully contained in $S$. We can guarantee these constraints by restricting $S$ to be convex. Recall a set is called convex if for all $x, y \in S$ and $\lambda \in [0,1]$ it holds that $\lambda x + (1-\lambda)y \in S$, exactly what we require for the proof to work. We now can state a more general result, which is known as the *multivariate mean value theorem*.
+This result, while straightforward, is somewhat restrictive as it only applies to linear paths between points fully contained in $S$. We can ensure these constraints by stipulating that $S$ is convex. A set is considered convex if, for all $x, y \in S$ and $\lambda \in [0,1]$, the point $\lambda x + (1-\lambda)y$ also belongs to $S$, which is a requirement for our proof to hold. We can now state a more general theorem known as the "multivariate mean value theorem."
 
 <div class="lemma">
-Be $f$ differentiable on an open and convex set $S \subset \mathbb{R}^n$. Then for any $x, y \in S$ we have that
+For a differentiable function $f$ on an open and convex set $S \subset \mathbb{R}^n$, then for any $x, y \in S$, we have
 $$  \mid  \mid f(x) - f(y) \mid  \mid _a \leq  \mid  \mid J_f(\xi) \mid  \mid \cdot  \mid  \mid x-y \mid  \mid _b$$ 
 </div>
 [proof]
@@ -65,10 +69,11 @@ $$  \mid  \mid  J_f(\xi) (x-y)  \mid  \mid _a \leq  \mid  \mid  J_f(\xi) \mid  \
 which proofs the statement.
 [/proof]
 
-This now allows us to state the local Lipschitz criteria.
+
+This theorem allows us to establish the local Lipschitz criteria.
 
 <dir class="theorem">
- The function $f$ is locally L-Lipschitz on an open and convex set $S$ in norm $ \mid  \mid \cdot  \mid  \mid _a$ and $ \mid  \mid \cdot \mid  \mid _b$ if and only if 
+A function $f$ is locally L-Lipschitz on an open and convex set $S$ in the norm $ \mid  \mid \cdot  \mid  \mid _a$ and $ \mid  \mid \cdot \mid  \mid _b$ if and only if 
  
  $$ \forall x \in S:  \mid  \mid J_f(x) \mid  \mid  \leq L$$
  where the operator norm is induced by the vector norms $ \mid  \mid \cdot  \mid  \mid _a$ and $ \mid  \mid \cdot \mid  \mid _b$. This further implies that the norm of all directional derivatives $ \mid \mid f_v'(x) \mid \mid_a$ is bounded by $L$.
@@ -91,30 +96,28 @@ $$ \begin{aligned}
 $$
 [/proof]
 
+
 ### Applications
 
-That is nice and can help us to restrict the Lipschitz constant, e.g., for neural networks. A neural network can typically be written in a "layer-wise" composition of linear maps and nonlinear activation functions, i.e., for a single layer ReLU $g(x) = \max(x, 0)$ neural network 
+This notion of local Lipschitzness is valuable for various applications, such as constraining the Lipschitz constant in neural networks. A neural network can often be expressed as a composition of linear maps and nonlinear activation functions in a "layer-wise" manner. For a single-layer ReLU network, the chain rule reveals the Jacobian's form:
 
 $$ f(x) = g_1(W_1x + b)$$
 
-By the chain rule, the Jacobian takes the following form
+The Jacobian for this network can be expressed as:
 
-$$ J_f(x) = J_{g}(h_1)W_1  \text{ with } h_1 = Wx + b $$
+$$ J_f(x) = J_{g}(h_1)W_1, \text{ where } h_1 = Wx + b $$
 
-where $J_{g}$ takes the form of a diagonal matrix which is either zero or one.
+Here, $J_{g}$ denotes the Jacobian of the ReLU nonlinearity. It takes on the form of a diagonal matrix that consists of zeros and ones, depending of the input to it is positive or negative.
 
-Given some convex set $x$, we can thus compute the local Lipschitz constant by solving the following optimization problem
+To compute the local Lipschitz constant for a given convex set $S$, we can solve the following optimization problem:
 
 $$ L = \sup_{x \in S} \mid \mid  J_f(x)\mid \mid  $$
 
-This is generally hard because, as we saw, the Jacobian does depend on the hidden activations, hence would require some constrained numerical optimization.
-
-Yet we can find more easily an upper bound by using the submultiplicative property of the operator norm.
+Solving this optimization problem can be challenging, as the Jacobian depends on the hidden activations, necessitating constrained numerical optimization techniques. Yet, we can find an upper bound more easily by leveraging the submultiplicative property of the operator norm:
 
 $$ L = \sup_{x \in S} \mid \mid  J_f(x)\mid \mid  = \sup_{x \in S} \mid \mid  J_{ReLU}(h(x))W\mid \mid  \leq  \sup_{x \in S} \mid \mid  J_{ReLU}(h(x))\mid \mid  \cdot \mid \mid W\mid \mid  \leq \mid \mid W\mid \mid  $$
 
-Hence we can upper bound the neural net Lipschitz constant by constraining the operator norm on the weights. This is the foundation of how Lipschitz-Networks are constructed or why spectral normalization works (it bounds the L2 operator norm).
-
+This upper bound on the Lipschitz constant can be for example be enforced by constraining the operator norm of the network weights. For instance, we can normalize the spectral norm, which is the largest singular value of the weight matrix. This is a common technique for ensuring robustness in neural networks. But recall that this implicitly assumes that the right measure of distance within the input and output space is the Euclidean norm. 
 ## Probabilistic interpretation
 
 As one can guess, the above statements can be interpreted as "worst-case" guarantees. This simply follows by definition of operator norms: It equals the worst-case absolute slope in any possible direction. Yet, sometimes we may be interested in average-case guarantees.
@@ -125,19 +128,22 @@ A prior $p(v)$ on a unit-sphere induces a distribution on the directional deriva
 
 $$ \mathbb{E}_{p(v)}[f_v'(x)] = J_f(x)\mathbb{E}_{p(v)}[v] = 0$$
 
-$$ \Sigma_{p(v)}[f_v'(x)] = \mathbb{E}_{p(v)}[ J_f(x)v(v)^T] = \frac{1}{d} J_f(x)J_f(x)^T $$
+$$ \Sigma_{p(v)}[f_v'(x)] = \mathbb{E}_{p(v)}[ J_f(x)vv^TJ_f(x)^T] = \frac{1}{d} J_f(x)J_f(x)^T $$
 
 So this is a nice closed-form solution and again involves the Jacobian matrix. Recall these results are induced by the L2 norm, so they also should be related to the operator norm induced by the L2 norm. Recall that $\mid \mid  J_f(x)\mid \mid $ equals the largest singular value and thus is related to the eigenvalue of $J_f(x)^T J_f(x)$. Be $v$ the corresponding eigenvector then
 
-$$ J_f(x)^T J_f(x) = \lambda v \iff J_f(x)J_f(x)^T(J_f(x)v) = \lambda (J_f(x)v)$$
+$$ J_f(x)^T J_f(x)v = \lambda v \iff J_f(x)J_f(x)^T(J_f(x)v) = \lambda (J_f(x)v)$$
 
 and hence both share the same eigenvalues. As $J_f(x)J_f(x)^T$ is up to a constant the covariance matrix of directional derivatives, the eigenvector with the largest eigenvalue hence points in the direction of the largest variation as required by the definition of the operator norm.
 
 Yet for example if we instead want to control the average variation of the function, this suggests controlling all the eigenvalues i.e. by controlling the trace of the covariance.
 
-## Non-standard norms
+
+## Investigating other norms
 
 Both the operator norm as well as the covariance matrix of the directional derivatives can be hard to compute for non-standard norms. We will investigate here the problem in the case of a more general "euclidean-like" norm, the *elliptical norm*.
+
+Why would we be interesting in doing so? Well, the inputs and outputs of e.g. a neural networks are typically not Euclidean vectors. For example, the inputs may be images and The outputs may be probability distributions. Images are invariant to translations and rotations and thus the Euclidean norm is not a good measure of distance. Similarly, probability distributions are not vectors and thus the Euclidean norm is not a good measure of distance. Controlling the Lipschitz constant in the Euclidean norm is thus not a good way to enforce a robustness property. Instead, we may want to control the Lipschitz constant in a norm that is more suitable for the task at hand.
 
 <dir class="definition">
  An elliptical (pseudo-)norm $\mid \mid  \cdot \mid  \mid _S$ is defined for a positive (semi) definite matrix $S$ as given by
@@ -171,9 +177,6 @@ Which is known as the generalized eigenvalue problem. Thus the operator norm is 
 
 Now consider the other way around, i.e., the operator norm induced by  $\mid \mid \cdot\mid \mid_2$ and $\mid \mid \cdot\mid \mid_S$:
 
-$$ p(z|x) = p(z,x)/p(x)  $$
-
-
 $$ \mid \mid  A \mid \mid_{2S}  = \sup_{\mid \mid v\mid \mid_2 = 1} \mid \mid Av\mid \mid_S = \sup_{\mid \mid v\mid \mid_2^2 = 1} \mid \mid Av\mid \mid _S^2$$
 
 Similarly, the Lagrangian is given by
@@ -199,36 +202,44 @@ It is straightforward to see that relying only on $\mid \mid \cdot \mid \mid_S$ 
 We can change the covariance matrix by changing the "prior" $p(v)$. Our goal may be again to draw uniformly from the unit-ellipse induced by the norm $ \mid  \mid\cdot \mid  \mid_S$. The latter lemma shows 
 
 <dir class="lemma">
-Be $S$ a symmetric postive definite matrix and $w \sim \mathcal{N}(0, S^{-1})$, then
+Be $S = LL^T$ a symmetric postive definite matrix and $w \sim \mathcal{N}(0, S^{-1})$, then
 
 $$ v = \frac{w}{ \mid  \mid w \mid  \mid_S} \text{ is uniformly distributed on } \{v \in \mathbb{R}^n:  \mid  \mid v \mid  \mid_S = 1 \} $$
 
 </dir>
 [proof]
-Because $S$ is p.d also $S^{-1}$ is and thus there exists a square root $S^{-1} = L^{-1}L^{-T}$. Be $\epsilon \sim \mathcal{N}(0, I)$ then $w \sim L^{-1}\epsilon$. We thus can write <br>
+Be $S = LL^T$ p.d  then  also $S^{-1} = L^{-1}L^{-T}$ is p.d with a square root. Be $\epsilon \sim \mathcal{N}(0, I)$ then $w \sim L^{-1}\epsilon$. Thus we can see that <br>
 $$  \mid \mid w \mid  \mid_S^2 = w^T S w = w^T L^T L w = \epsilon^T L^{-T} L^T L L^{-1} \epsilon = \epsilon^T \epsilon =  \mid \mid \epsilon \mid  \mid_2^2$$ <br>
-as $S$ is symmetric. As $\epsilon$ is a unit-normal vector, this proves the statement.
+As a result we have that <br>
+$$ v = \frac{w}{ \mid  \mid w \mid  \mid_S} = L^{-1} \frac{\epsilon}{||\epsilon||_2}$$ <br>
+We know that the latter is uniformly distributed on the unit sphere. The linear transformation of a uniform distribution is again uniform on the image of the domain. Thus $v$ is uniformly distributed on the ellipse.
 [/proof]
 
-So now the question is how to modify $S$ such that $w$ becomes a unit normal distribution. And indeed, we can always modify it as following
 
-$$ w \sim \mathcal{N}(0, S^{-1}) \iff w = L \epsilon \iff \epsilon = L^{-1}w $$
+$$ \Sigma_{p(v)}[v] = \mathbb{E}_{p(v)}[vv^T] = \mathbb{E}_{p(w)}\left[\left( \frac{w}{ \mid  \mid w \mid  \mid_S}\right) \left( \frac{w}{ \mid  \mid w \mid  \mid_S}\right)^T\right]$$
 
-Plugging this back we have that
+$$  =\mathbb{E}_{p(w)}\left[ \frac{ww^T}{w^T S w} \right]= L^{-1}\mathbb{E}_{\mathcal{N}(\epsilon;0,I)}\left[ \frac{\epsilon \epsilon^T}{\epsilon^T \epsilon} \right] L^{-T}$$
 
-$$ \mid \mid v \mid  \mid_S^2 = \mid \mid w \mid  \mid_{S^{-1}}^2 = \mid \mid L^{-1}w \mid  \mid_{I}^2 = \mid \mid L^{-1}w \mid  \mid_{2}^2 $$
+This inner expectation looks nasty, but it really is not:
+<dir class="lemma">
+Be $x \sim \mathcal{N}(0, I)$ with $x \in \mathbb{R}^d$ then
 
-Now we have some interesting statement about $v$. We can easily compute its covariance as following
+$$ \mathbb{E}_{x} \left[\frac{xx^T}{x^Tx}\right] = \frac{1}{d} I $$
 
-$$ \Sigma_{p(v)}[v] = \mathbb{E}_{p(v)}[vv^T] = \mathbb{E}_{p(v)}\left[\left( \frac{w}{ \mid  \mid w \mid  \mid_S}\right) \left( \frac{w}{ \mid  \mid w \mid  \mid_S}\right)^T\right]$$
+</dir>
+[proof]
+Be $X =  \frac{xx^T}{x^Tx}$ then we can deduct that $$X_{ii} = \frac{x_i^2}{\sum_{i=1}^dx_i^2}$$ and $$X_{ij} = \frac{x_ix_j}{\sum_{i=1}^dx_i^2}$$. <br>
+Let's first try to get the diagonal elements. We have that<br>
+$$ 1 = \mathbb{E}_x\left[ 1 \right] = \mathbb{E}_x\left[ \frac{\sum_{i=1}^d x_i}{\sum_{i=1}^d x_i} \right] = \sum_{i=1}^d \mathbb{E}_x\left[ \frac{ x_i}{\sum_{i=1}^d x_i} \right] = d \mathbb{E}_x\left[ \frac{ x_1}{\sum_{i=1}^d x_i} \right]$$ <br>
+The last steps follows through the linearity of expectation and that all $x_i$ are iid. Hence $$\mathbb{E}_x[X_{ii}] = \frac{1}{d}$$. <br>
+To show that the off-diagonal elements are zero, we can use that fact that both $X_{ij}$ and $-X_{ij}$ are equally distributed. Thus $$\mathbb{E}_x[X_{ij}] = -\mathbb{E}_x[X_{ij}]$$ and hence $$\mathbb{E}_x[X_{ij}] = 0$$
+[/proof]
 
-$$ = \frac{1}{ \mid  \mid w \mid  \mid_S^2}\mathbb{E}_{p(v)}\left[ww^T\right] = \frac{S}{ \mid  \mid w \mid  \mid_S^2}$$
+Hence we end up with
 
-The denominator does not depend on $S$ and therefore all the eigenvalues of $\Sigma_{p(v)}[v]$ are proportional to the eigenvalues of $S$. By choosing $S = I$ we obtain the standard covariance matrix, but by choosing $S$ with the inverse eigenvalues of $J_f(x)J_f(x)^T$ we can change the covariance of $v$.
+$$ \Sigma_{p(v)}[v] = \frac{1}{d} S^{-1} \qquad \Rightarrow \qquad \Sigma_{p(v)}[f_v'(x)] = \frac{1}{d} J_f(x)S^{-1}J_f(x)^T $$
+
 
 ## Conclusion
 
 In summary, this post introduced the notion of a "local Lipschitz" property of a function. We generalized the one-dimensional notion to multivariate functions and showed that it can be quantified using operator norms of the Jacobian matrix. We also discussed how different norms can induce different notions of Lipschitzness and how this can be used to study the variation of functions in different ways. 
-
-## References
-* http://www.math.toronto.edu/courses/mat237y1/20199/notes/Chapter2/S2.4.html#:~:text=The%20Mean%20Value%20theorem%20of,(a)b%E2%88%92a.
