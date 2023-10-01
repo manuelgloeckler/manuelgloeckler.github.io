@@ -72,7 +72,7 @@ I am developing machine learning tools to perform Bayesian inference for simulat
   Okt 2016 - Sep 2019\
   University Tübingen (Grade: 1.31, 3.7 GPA equivalent)\
   Thesis:  ["The landscapes of CD8+ T cell immunogenicity from a self-tolerance based perspective in sequence space"](assets/bachelor_thesis.pdf)\
-  Transcript: [Transcript of Records](assets/bachelor_tor.pdf), [Certificate](assets/backelor_zeugniss.pdf)
+  Transcript: [Transcript of Records](assets/backelor_tor.pdf), [Certificate](assets/bachelor_zeugniss.pdf)
 
 * **A-Levels**\
   Joachim-Hahn-Gymnasium, Blaubeuren, Germany (Grade: 2.1, 3.0 GPA equivalent)
