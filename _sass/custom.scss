@@ -116,3 +116,39 @@ figcaption:before {
     overflow: hidden;
     background-color: #f1f1f1;
   }
+
+/* style.css */
+
+.image-text-container {
+display: flex;
+align-items: center;
+}
+
+.image-text-container img {
+max-width: 50%; /* Adjust the width of the image as needed */
+margin-right: 20px; /* Add spacing between the image and text */
+border-radius: 50%; /* Make the image appear as a circle */
+}
+
+.text {
+flex: 1; /* Allow the text to take up available space */
+}
+
+.text h2 {
+margin: 0; /* Remove default margin for the heading */
+}
+
+.text p {
+margin-top: 0; /* Remove default margin for the paragraph */
+}
+
+/* In a CSS file or within a <style> tag in your HTML file */
+.table-no-border {
+border-collapse: collapse; /* Remove spacing between table cells */
+border: none !important; /* Remove any remaining borders and override conflicting styles */
+}
+
+.table-no-border td {
+border: none !important; /* Remove borders from table cells and override conflicting styles */
+padding: 50px; /* Add padding for spacing if desired */
+}

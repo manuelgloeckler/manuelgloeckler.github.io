@@ -2,7 +2,7 @@
 layout: article
 title: All about Fisher information
 key: A4
-tags: Statistics, Math
+tags: Statistics, Math, Probability Theory
 aside:
     toc: true
 comment: true

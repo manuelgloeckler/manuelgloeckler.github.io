@@ -26,7 +26,12 @@ titles:
 key: page-about
 ---
 
-
+<table class="table-no-border">
+  <tr>
+    <td style="width: 500px;">
+     <div>
+  {{ 
+  "
 I am a PhD student at the University of Tübingen and part of the International Max-Planck Research School for Intelligent Systems (IMPRS-IS). My supervisor is Prof Dr Jakob Macke.
 
 I am developing machine learning tools to perform Bayesian inference for simulation-based models. I am interested in the intersection of machine learning, statistics and science applications. Some of my main interests are:
@@ -37,9 +42,18 @@ I am developing machine learning tools to perform Bayesian inference for simulat
 - Probabilistic programming
 - Uncertainty quantification/calibration
 
-## CV
+" | markdownify}}
+</div>
+    </td>
+    <td style="width: 400px;">
+      <div class="image-text-container">
+  <img src="assets/image.jpg" alt="Your Name" width="400">
+</div>
+    </td>
+  </tr>
+</table>
 
-This list may not be up to date. For a more up to date version please refer to my [CV](/assets/cv.pdf).
+## Curriculum Vitae
 
 ### Education
 
@@ -63,7 +77,7 @@ This list may not be up to date. For a more up to date version please refer to m
 * **A-Levels**\
   Joachim-Hahn-Gymnasium, Blaubeuren, Germany (Grade: 2.1, 3.0 GPA equivalent)
 
-## Work experience
+### Work experience
 
 * **Research assistant**\
   Seq 2020 - Feb 2022\
@@ -75,7 +89,7 @@ This list may not be up to date. For a more up to date version please refer to m
   University Tübingen, Theory of Machine Learning Group, Prof. Dr. Ulrike von Luxburg.\
   Teaching assistant for lecture "Algorithms".
 
-## Selected Publications
+### Selected Publications
 
 For a full list of publications please refer to [google scholar](https://scholar.google.com/citations?user=0Vdv0H0AAAAJ&hl=de).
 
@@ -86,14 +100,14 @@ For a full list of publications please refer to [google scholar](https://scholar
 * **Adversarial robustness of amortized Bayesian inference**, ICML 2023\
   Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2305.14984)
 
-## Other
+### Other
 
 *  IOP trusted reviewer [[certificate]](assets/iop_trusted_reviewer.pdf)
 *  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assets/ellis_summer_school.pdf) 
 *  Machine Learning Summer School 2021 [[certificate]](assets/mlls_summer_school.pdf)
 
 
-Here is a [CV](/assets/cv.pdf) as PDF (probably outdated).
+Here is a [CV](/assets/cv.pdf) as PDF.
 
 ## Some notes
 
