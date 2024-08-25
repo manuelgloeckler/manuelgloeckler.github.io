@@ -215,6 +215,7 @@ $$ v = \frac{w}{ \mid  \mid w \mid  \mid_S} = L^{-1} \frac{\epsilon}{||\epsilon|
 We know that the latter is uniformly distributed on the unit sphere. The linear transformation of a uniform distribution is again uniform on the image of the domain. Thus $v$ is uniformly distributed on the ellipse.
 [/proof]
 
+The covariance matrix of this distribution is hence given by
 
 $$ \Sigma_{p(v)}[v] = \mathbb{E}_{p(v)}[vv^T] = \mathbb{E}_{p(w)}\left[\left( \frac{w}{ \mid  \mid w \mid  \mid_S}\right) \left( \frac{w}{ \mid  \mid w \mid  \mid_S}\right)^T\right]$$
 
@@ -235,7 +236,7 @@ The last steps follows through the linearity of expectation and that all $x_i$ a
 To show that the off-diagonal elements are zero, we can use that fact that both $X_{ij}$ and $-X_{ij}$ are equally distributed. Thus $$\mathbb{E}_x[X_{ij}] = -\mathbb{E}_x[X_{ij}]$$ and hence $$\mathbb{E}_x[X_{ij}] = 0$$
 [/proof]
 
-Hence we end up with
+For the covariance matrix of the directional derivatives we hence have that
 
 $$ \Sigma_{p(v)}[v] = \frac{1}{d} S^{-1} \qquad \Rightarrow \qquad \Sigma_{p(v)}[f_v'(x)] = \frac{1}{d} J_f(x)S^{-1}J_f(x)^T $$
 
