@@ -66,14 +66,14 @@ I am developing machine learning tools to perform Bayesian inference for simulat
   Okt 2019 - Mar 2022\
   University Tübingen (Grade: 1.15, 3.9 GPA equivalent)\
   Thesis: ["Variational methods for simulation-based inference"](assets/FINAL_thesis_version.pdf)\
-  Transcript: [Transcript of Records](assets/master_tor.pdf), [Certificate](assets/master_zeugniss.pdf)
+  Transcript: [Transcript of Records](assets/master_tor.pdf), [Certificate](assets/master_zeugniss.pdf)\
   Transcript (GPA):[Grade summary](assets/list_of_grades.pdf)
 
 * **Bachelor of Science in Bioinformatics**\
   Okt 2016 - Sep 2019\
   University Tübingen (Grade: 1.31, 3.7 GPA equivalent)\
   Thesis:  ["The landscapes of CD8+ T cell immunogenicity from a self-tolerance based perspective in sequence space"](assets/bachelor_thesis.pdf)\
-  Transcript: [Transcript of Records](assets/backelor_tor.pdf), [Certificate](assets/bachelor_zeugniss.pdf)
+  Transcript: [Transcript of Records](assets/backelor_tor.pdf), [Certificate](assets/bachelor_zeugniss.pdf)\
   Transcript (GPA):[Grade summary](assets/list_of_grades.pdf)
 
 * **A-Levels**\
@@ -95,14 +95,14 @@ I am developing machine learning tools to perform Bayesian inference for simulat
 
 For a full list of publications please refer to [google scholar](https://scholar.google.com/citations?user=0Vdv0H0AAAAJ&hl=de).
 
-* **All-in-one simulation-based inference**, NeurIPS 2022\
-  Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2206.00007)
+* **All-in-one simulation-based inference**, ICML 2024\
+  Manuel Glöckler, Michael Deistler, Christian Weilbach, Frank Wood, Jakob H Macke [[arxiv]](https://arxiv.org/abs/2404.09636)
 
 * **Variational methods for simulation-based inference**, ICLR 2022\
-  Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2203.04176)
+  Manuel Glöckler, Michael Deistler, Jakob H Macke [[arxiv]](https://arxiv.org/abs/2203.04176)
 
 * **Adversarial robustness of amortized Bayesian inference**, ICML 2023\
-  Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2305.14984)
+  Manuel Glöckler, Michael Deistler, Jakob H Macke [[arxiv]](https://arxiv.org/abs/2305.14984)
 
 ### Other
 
@@ -111,7 +111,7 @@ For a full list of publications please refer to [google scholar](https://scholar
 *  Machine Learning Summer School 2021 [[certificate]](assets/mlls_summer_school.pdf)
 
 
-Here is a [CV](/assets/cv.pdf) as PDF.
+Here is a [CV](/assets/academic_cv.pdf) as PDF.
 
 ## Some notes
 
