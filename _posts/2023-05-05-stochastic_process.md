@@ -263,7 +263,7 @@ Let's consider two examples of stochastic processes, the Wiener and Cauchy proce
 
 The Wiener process is mean square continuous which can be shown as follows:
 
-By definition, we have that for $X_s - X_t \sim \mathcal{N}(0, |s-t|)$, we have that
+By definition, we have that for $$X_s - X_t \sim \mathcal{N}(0, |s-t|)$$, we have that
 
 $$\mathbb{E}[|X_s - X_t|^2] = \mathbb{E}_{X\sim \mathcal{N}(0, |s-t|)}[X^2] = |s-t|$$
 
