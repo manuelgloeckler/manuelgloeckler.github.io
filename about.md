@@ -32,14 +32,14 @@ key: page-about
      <div>
   {{ 
   "
-I am a PhD student at the University of Tübingen and part of the International Max-Planck Research School for Intelligent Systems (IMPRS-IS). My supervisor is Prof Dr Jakob Macke.
+I am a PhD student at the University of Tübingen and part of the International Max-Planck Research School for Intelligent Systems (IMPRS-IS). My supervisor is Prof. Dr. Jakob Macke.
 
 I am developing machine learning tools to perform Bayesian inference for simulation-based models. I am interested in the intersection of machine learning, statistics and science applications. Some of my main interests are:
 
 - Bayesian inference
 - Neural density estimation and generative models
 - Robustness
-- Probabilistic programming
+- Probabilistic and differentiable programming
 - Uncertainty quantification/calibration
 
 " | markdownify}}
@@ -67,12 +67,14 @@ I am developing machine learning tools to perform Bayesian inference for simulat
   University Tübingen (Grade: 1.15, 3.9 GPA equivalent)\
   Thesis: ["Variational methods for simulation-based inference"](assets/FINAL_thesis_version.pdf)\
   Transcript: [Transcript of Records](assets/master_tor.pdf), [Certificate](assets/master_zeugniss.pdf)
+  Transcript (GPA):[Grade summary](assets/list_of_grades.pdf)
 
 * **Bachelor of Science in Bioinformatics**\
   Okt 2016 - Sep 2019\
   University Tübingen (Grade: 1.31, 3.7 GPA equivalent)\
   Thesis:  ["The landscapes of CD8+ T cell immunogenicity from a self-tolerance based perspective in sequence space"](assets/bachelor_thesis.pdf)\
   Transcript: [Transcript of Records](assets/backelor_tor.pdf), [Certificate](assets/bachelor_zeugniss.pdf)
+  Transcript (GPA):[Grade summary](assets/list_of_grades.pdf)
 
 * **A-Levels**\
   Joachim-Hahn-Gymnasium, Blaubeuren, Germany (Grade: 2.1, 3.0 GPA equivalent)
@@ -93,6 +95,8 @@ I am developing machine learning tools to perform Bayesian inference for simulat
 
 For a full list of publications please refer to [google scholar](https://scholar.google.com/citations?user=0Vdv0H0AAAAJ&hl=de).
 
+* **All-in-one simulation-based inference**, NeurIPS 2022\
+  Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2206.00007)
 
 * **Variational methods for simulation-based inference**, ICLR 2022\
   Manuel Glöckler, Michael Deistler, Jakob Macke [[arxiv]](https://arxiv.org/abs/2203.04176)
