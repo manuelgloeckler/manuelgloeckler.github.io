@@ -54,6 +54,8 @@ I am developing machine learning tools to perform Bayesian inference for simulat
 
 ## Curriculum Vitae
 
+For a nicer and likely more complete overview, here is a [CV](/assets/academic_cv.pdf) as PDF.
+
 ### Education
 
 * **PHD student at the International Max-Planck Research School for Intelligent Systems** [(IMPRS-IS)](https://imprs.is.mpg.de/)\
@@ -109,8 +111,6 @@ For a full list of publications please refer to [google scholar](https://scholar
 *  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assets/ellis_summer_school.pdf)
 *  Machine Learning Summer School 2021 [[certificate]](assets/mlls_summer_school.pdf)
 
-
-Here is a [CV](/assets/academic_cv.pdf) as PDF.
 
 ## Some notes
 
