@@ -30,15 +30,14 @@ key: page-about
   <tr>
     <td style="width: 500px;">
      <div>
-  {{ 
+  {{
   "
-I am a PhD student at the University of Tübingen and part of the International Max-Planck Research School for Intelligent Systems (IMPRS-IS). My supervisor is Prof. Dr. Jakob Macke.
+I am a PhD student at the University of Tübingen and part of the International Max-Planck Research School for Intelligent Systems (IMPRS-IS). My supervisor is Prof. Dr. Jakob H. Macke.
 
 I am developing machine learning tools to perform Bayesian inference for simulation-based models. I am interested in the intersection of machine learning, statistics and science applications. Some of my main interests are:
 
 - Bayesian inference
 - Neural density estimation and generative models
-- Robustness
 - Probabilistic and differentiable programming
 - Uncertainty quantification/calibration
 
@@ -107,7 +106,7 @@ For a full list of publications please refer to [google scholar](https://scholar
 ### Other
 
 *  IOP trusted reviewer [[certificate]](assets/iop_trusted_reviewer.pdf)
-*  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assets/ellis_summer_school.pdf) 
+*  Cambridge ELLIS Machine Learning Summer School and poster presentation 2022 [[certificate]](assets/ellis_summer_school.pdf)
 *  Machine Learning Summer School 2021 [[certificate]](assets/mlls_summer_school.pdf)
 
 
